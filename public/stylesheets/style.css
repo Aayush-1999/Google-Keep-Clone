@@ -1,0 +1,82 @@
+.container-home{
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+}
+
+.mt-2{
+    margin-top: 1.5rem;
+}
+
+.mt-3{
+    margin-top: 3rem;
+}
+
+.form-width{
+    width: 49%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-title{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.btn-large{
+    width: 100%;
+}
+
+.msg {
+    width:100%;
+    border: 1px solid;
+    padding:10px;
+    margin: 20px;
+    color: grey;
+}
+
+.msg-error {
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    border-radius: 0.25rem;
+    width: 50%;
+    padding: 12px 20px;
+}
+.msg-info{
+    margin-right: auto;
+    margin-left: auto;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    border-radius: 0.25rem;
+    width: 50%;
+    padding: 12px 20px;
+  }
+
+  @media only screen and (max-width:499px){
+    .form-width,
+    .blog-form-width{
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+  @media only screen and (min-width: 999px){
+    .container-home {
+        max-width: 82%;
+    }
+    .ml-1{
+        margin-left: 10px !important;
+    }
+    .mr-2{
+        margin-right: 20px !important;
+    }
+    /* NAV BAR */
+    .brand-logo{
+        margin-left: 15px;
+    }
+}
