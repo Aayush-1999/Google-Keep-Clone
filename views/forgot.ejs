@@ -1,0 +1,29 @@
+<%include ./partials/header%>
+
+<div class="container">
+    <div class="form-width  mt-3">
+        <div class="card animated zoomIn fast">
+            <div class="card-content">
+                <span class="card-title"><p class=" form-title">Forgot Password</p></span>
+                <form action="/forgot" method="POST" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" name="email" class="validate">
+                            <label for="email">Enter your email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field center col s12">
+                            <button class="waves-effect waves-light btn-large">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+      
+
+<%include ./partials/footer%>
