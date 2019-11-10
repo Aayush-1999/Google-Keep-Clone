@@ -1,10 +1,11 @@
-    <input type="text" hidden name="note[pinned]" id="pinValue" value="false" >
-    <input type="text" hidden name="note[archive]" id="archiveValue" value="false" >
+<form action="/note/<%=note._id %>?_method=PUT"" method="POST" enctype="multipart/form-data">
+    <input type="text" hidden name="pinned" id="pinValue" value="<%= note.pinned %>" >
+    <input type="text" hidden name="archive" id="archiveValue" value="<%= note.archive %>" >
     <a href="#" onclick="initColorPicker()" class="dropdown-trigger tooltipped"  data-target='dropdown1' data-position="bottom" data-tooltip="Change color">
         <i class="material-icons">color_lens</i>
     </a>
     <div class='dropdown-content' id='dropdown1' >
-        <input name="note[color]" hidden id="noteboxcolor" >
+        <input name="color" hidden id="noteboxcolor" >
         <canvas id="colorCanvas" class="color-canvas" width="250" height="250" style="border-radius: 50%;"></canvas>
     </div>                                    
 
@@ -24,7 +25,8 @@
     </a>
     <div class='dropdown-content' id='dropdown2' >
         <div class="input-field" style="width: 90%; margin:1rem">
-            <input placeholder="label" name="note[label]" type="text">
+            <input placeholder="label" name="label" type="text">
         </div>
     </div>
     <button class="waves-effect waves-teal btn-flat right">Close</button>
+</form>
