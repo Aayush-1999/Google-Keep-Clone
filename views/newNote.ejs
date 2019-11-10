@@ -1,0 +1,50 @@
+<form action="/note" method="POST" enctype="multipart/form-data">
+    <div class="card-content">
+        <span class="card-title">
+            <div class="input-field note">
+                <input placeholder="Title" name="note[title]" type="text">
+            </div>
+        </span>
+        <p>
+            <div class="input-field note ">
+                <input placeholder="Take a note" name="note[text]" type="text">
+            </div>                                    
+        </p>                        
+    </div>
+    <div class="card-action">
+        <input type="text" hidden name="note[pinned]" id="pinValue" value="false" >
+        <input type="text" hidden name="note[archive]" id="archiveValue" value="false" >
+        <input type="text" hidden name="reminder">
+        <a href="" class="tooltipped" data-position="bottom" data-tooltip="Add reminder">
+            <i class="material-icons">add_alert</i>
+        </a>
+         <a href="#" onclick="initColorPicker()" class="dropdown-trigger tooltipped"  data-target='dropdown1' data-position="bottom" data-tooltip="Change color">
+            <i class="material-icons">color_lens</i>
+        </a>
+        <div class='dropdown-content' id='dropdown1' >
+            <input name="note[color]" hidden id="noteboxcolor" >
+            <canvas id="colorCanvas" class="color-canvas" width="250" height="250" style="border-radius: 50%;"></canvas>
+        </div>                                    
+
+        <label for="browse" class="tooltipped" data-position="bottom" data-tooltip="Add image" style="color: #ffab40; margin-right: 24px;">
+            <i class="material-icons">add_photo_alternate</i>
+        </label>
+        <input type="file" id="browse" name="image" style="display: none">
+        
+        <a href="#" onclick="setPin()" class="tooltipped" data-position="bottom" data-tooltip="Pin note">
+            <i class="material-icons">bookmark_border</i>
+        </a>
+        <a href="#" onclick="setArchive()" class="tooltipped" data-position="bottom" data-tooltip="Archive">
+            <i class="material-icons">backup</i>
+        </a>
+        <a href="#" class="dropdown-trigger tooltipped"  data-target='dropdown2' data-position="bottom" data-tooltip="Add labels">
+            <i class="material-icons">label</i>
+        </a>
+        <div class='dropdown-content' id='dropdown2' >
+            <div class="input-field" style="width: 90%; margin:1rem">
+                <input placeholder="label" name="note[label]" type="text">
+            </div>
+        </div>
+        <button class="waves-effect waves-teal btn-flat right">Close</button>
+    </div>
+</form>
