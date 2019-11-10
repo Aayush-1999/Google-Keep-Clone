@@ -22,11 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Collapsible.init(elems,{});
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('select');
-//     var instances = M.FormSelect.init(elems,{});
-//   });
-
 
 //ACCORDIAN
 var acc = document.getElementsByClassName("accordion");

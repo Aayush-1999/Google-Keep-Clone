@@ -1,119 +1,81 @@
 const express        = require("express"),
       router         = express.Router(),
-      Blog           = require("../models/blog"),
+      Note           = require("../models/note"),
       methodOverride = require("method-override"),
-      middleware     = require("../middleware/verify"),
+    //   middleware     = require("../middlwares/verify"),
       {cloudinary,upload} = require("../utils/cloudinary");
 
-//SHOW FORM FOR CREATING NEW BLOG
-router.get("/create",middleware.isLoggedIn,(req,res)=>{
-    res.render("blog/create");
-});
+    //   middleware.isLoggedIn
 
 //CREATING NEW BLOG
-router.post("/" ,middleware.isLoggedIn,upload.single('image'),async function(req,res){
+router.post("/" ,upload.single('image'), async function(req,res){
+    console.log("reached");
     try{
-        let result= await cloudinary.uploader.upload(req.file.path)// can also add webpurifier to purify images uploaded on server (for more details see cloudinary addons)
-        // add cloudinary url for the image to the campground object under image property
-        req.body.blog.image = result.secure_url;
-        // add image's public url to the campground object for identifying and deleting image on the cloudinary
-        req.body.blog.imageId = result.public_id;
-        // add author to campground
-        req.body.blog.author = req.user._id
-        let blog=await Blog.create(req.body.blog);
-        //redirect back to blogs page
-        res.redirect("/blog/"+blog.id);
+        if(req.file){
+            let result= await cloudinary.uploader.upload(req.file.path)
+            req.body.note.image = result.secure_url;
+            req.body.note.imageId = result.public_id;
+        }
+        // req.body.note.author = req.user._id
+        let note=await Note.create(req.body.note);
+        console.log(note);
+        res.redirect("/");
     } catch(err) {
-        req.flash('error', err.message);
-        res.redirect('back');
+        console.log(err);
+        // req.flash('error', err.message);
+        // res.redirect('back');
     }
 });
 
-//SHOW EITHER ALL BLOGS ON INDEX PAGE OR ON THE BASIS OF SEARCH RESULTS
-router.get("/",async function(req,res){
-    let noMatch=null;
+router.get("/",async (req,res)=>{
     try{
-        if(req.query.search){
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        blogs= await Blog.find({title:regex})
-            if(foundBlog.length<1){
-                noMatch="No Blogs found. Please try again.";
-            }
-            res.render("index",{blogs,noMatch});
-        } 
-        else{
-            blogs = await Blog.find().sort("-_id").exec();
-            res.render("index",{blogs,noMatch});
-        }
+        notes = await Note.find().sort("-_id").exec();
+        res.render("home",{notes});
     }
-    catch(err){
-        res.redirect("back");
+    catch{
+        res.redirect('back');
     }
 })
 
-//SHOW SINGLE BLOG
-router.get("/:id",(req,res)=>{
-    Blog.findById(req.params.id).
-        populate({
-            path:"comments",
-            model:"Comment",
-            populate:{
-                path:"author",
-                model:"User"
-            }
-        }).
-        populate("author").
-        exec((err,blog)=>{
-        if(err || !blog) {
-            req.flash("error","Blog not found");
-            res.redirect("back");
-        }
-        else {
-            res.render("blog/show",{blog});
-        }
-    });
-})
-
-//SHOW FORM FOR UPDATING A BLOG
-router.get("/:id/edit",middleware.checkBlogOwnership,(req,res)=>{
-    Blog.findById(req.params.id,(err,blog)=>{
-        res.render("blog/edit",{blog});
-    });
-})
-
-//UPDATE BLOG
-router.put("/:id",middleware.checkBlogOwnership,upload.single('image'),(req,res)=>{
-    Blog.findById(req.params.id,async function(err,blog){
+//UPDATE NOTE
+router.put("/:id",upload.single('image'),(req,res)=>{
+    console.log("reach put");
+    Note.findById(req.params.id,async (err,note)=>{
         if(err){
+            console.log(err);
             res.redirect("back");
         }
         else{
             if(req.file){
                 try{
-                    await cloudinary.uploader.destroy(blog.imageId);               
+                    await cloudinary.uploader.destroy(note.imageId);               
                     let result=await cloudinary.uploader.upload(req.file.path);
-                    blog.image=result.secure_url;
-                    blog.imageId=result.public_id;
+                    note.image=result.secure_url;
+                    note.imageId=result.public_id;
                 }
                 catch(err){
-                    res.redirect("/blog/"+ req.params.id + "/edit");
+                    res.redirect("/note");
                 }
-            }    
-            blog.title=req.body.title;
-            blog.body=req.body.body;
-            blog.save();
-            res.redirect("/blog/" + req.params.id);
+            }
+            note.pinned=req.body.pin;
+            note.archive=req.body.archive;
+            note.label.push(req.body.label);
+            note.color = req.body.color;    
+            note.save();
+            res.redirect("/note");
         }
     });
 })
 
-//DELETE A BLOG
-router.delete("/:id",middleware.checkBlogOwnership,(req,res)=>{
-    Blog.findById(req.params.id,async function(err,blog){
+//DELETE A NOTE
+router.delete("/:id",(req,res)=>{
+    Note.findById(req.params.id,async function(err,note){
         try{
-           await cloudinary.uploader.destroy(blog.imageId); 
-           blog.remove();
-           res.redirect("/blog");
+            if(note.imageId){
+                await cloudinary.uploader.destroy(note.imageId); 
+            }
+           note.remove();
+           res.redirect("/note");
         }
         catch(err){
            return res.redirect("back");  
@@ -121,9 +83,5 @@ router.delete("/:id",middleware.checkBlogOwnership,(req,res)=>{
      });
 })
 
-//FUNCTION FOR ESCAPING SEARCH PARAMETER
-function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
 
 module.exports=router;

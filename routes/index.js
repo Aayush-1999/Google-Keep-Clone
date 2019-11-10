@@ -5,7 +5,7 @@ const express      = require("express"),
       User         = require("../models/user");
       
 router.get("/",(req,res)=>{
-    res.render("home"); 
+    res.redirect("/note"); 
 });
 
 //SHOW REGISTER FORM

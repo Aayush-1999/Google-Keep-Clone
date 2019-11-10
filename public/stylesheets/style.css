@@ -4,10 +4,15 @@
     width: 90%;
 }
 
+.container-notes{
+    margin-right: 130px;
+}
 .mt-2{
     margin-top: 1.5rem;
 }
-
+.mt-1{
+    margin-top: 0.8rem;
+}
 .mt-3{
     margin-top: 3rem;
 }
@@ -41,8 +46,20 @@
     box-shadow: none !important;
 }
 
+.card{
+    border-radius: 0.5rem !important;
+}
+.card .card-content.note{
+    padding-top: 5px !important;
+    padding-bottom: 0px !important;
+}
+
 .card .card-action.note{
     padding: 6px 10px !important;
+}
+
+.sidenav-trigger.primary{
+    float: right !important;
 }
 
 .msg {
@@ -84,7 +101,7 @@
   }
   @media only screen and (min-width: 999px){
     .container-home {
-        max-width: 82%;
+        max-width: 90%;
     }
     .ml-1{
         margin-left: 10px !important;
@@ -95,5 +112,12 @@
     /* NAV BAR */
     .brand-logo{
         margin-left: 15px;
+    }
+    .sidenav.sidenav-fixed{
+        margin-top:66px !important;
+    }
+    .card.note-form{
+        margin: 0 auto; 
+        width: 65%;
     }
 }
