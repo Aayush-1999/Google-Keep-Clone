@@ -12,7 +12,7 @@ const indexRoute         = require("./routes/index"),
       noteRoute          = require("./routes/note"),
       resetPasswordRoute = require("./routes/resetpass");
 
-mongoose.connect("mongodb://127.0.0.1/fliprHackathon",{ useUnifiedTopology: true ,useNewUrlParser:true});
+mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true ,useNewUrlParser:true});
 mongoose.set("useFindAndModify",false);
 mongoose.set("useCreateIndex",true);
 
