@@ -28,6 +28,23 @@
     width: 100%;
 }
 
+.input-field.note{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.input-field.note input[type=text]{
+    border-bottom: none !important;
+}
+
+.input-field.note input[type=text]:focus{
+    box-shadow: none !important;
+}
+
+.card .card-action.note{
+    padding: 6px 10px !important;
+}
+
 .msg {
     width:100%;
     border: 1px solid;
