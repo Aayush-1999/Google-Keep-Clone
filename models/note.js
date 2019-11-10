@@ -4,9 +4,7 @@ const noteSchema = mongoose.Schema({
     id:String,
     title:String,
     text:String,
-    label:[{
-        type:String
-    }],
+    label:String,
     image:String,
     imageId:String,
     color:{

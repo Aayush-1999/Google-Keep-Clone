@@ -2,38 +2,41 @@ const express        = require("express"),
       router         = express.Router(),
       Note           = require("../models/note"),
       methodOverride = require("method-override"),
-    //   middleware     = require("../middlwares/verify"),
       {cloudinary,upload} = require("../utils/cloudinary");
 
-    //   middleware.isLoggedIn
 
 //CREATING NEW BLOG
 router.post("/" ,upload.single('image'), async function(req,res){
-    console.log("reached");
     try{
         if(req.file){
             let result= await cloudinary.uploader.upload(req.file.path)
             req.body.note.image = result.secure_url;
             req.body.note.imageId = result.public_id;
         }
-        // req.body.note.author = req.user._id
+        req.body.note.author = req.user._id
         let note=await Note.create(req.body.note);
+        note.save();
         console.log(note);
         res.redirect("/");
     } catch(err) {
         console.log(err);
-        // req.flash('error', err.message);
-        // res.redirect('back');
+        req.flash('error', err.message);
+        res.redirect('back');
     }
 });
 
 router.get("/",async (req,res)=>{
-    try{
-        notes = await Note.find().sort("-_id").exec();
-        res.render("home",{notes});
+    if(req.isAuthenticated()){
+        try {
+            let notes= await Note.find().where("author").equals(req.user._id).sort("-_id").exec();
+            res.render("home",{notes});
+          } 
+          catch(err) {
+            return res.redirect("back");
+          }
     }
-    catch{
-        res.redirect('back');
+    else{
+        res.render("login");
     }
 })
 
@@ -41,27 +44,23 @@ router.get("/",async (req,res)=>{
 router.put("/:id",upload.single('image'),(req,res)=>{
     console.log("reach put");
     Note.findById(req.params.id,async (err,note)=>{
-        if(err){
-            console.log(err);
-            res.redirect("back");
-        }
-        else{
+        try{
             if(req.file){
-                try{
-                    await cloudinary.uploader.destroy(note.imageId);               
-                    let result=await cloudinary.uploader.upload(req.file.path);
-                    note.image=result.secure_url;
-                    note.imageId=result.public_id;
-                }
-                catch(err){
-                    res.redirect("/note");
-                }
+                await cloudinary.uploader.destroy(note.imageId);               
+                let result=await cloudinary.uploader.upload(req.file.path);
+                note.image=result.secure_url;
+                note.imageId=result.public_id;
             }
             note.pinned=req.body.pin;
             note.archive=req.body.archive;
-            note.label.push(req.body.label);
-            note.color = req.body.color;    
+            note.label=req.body.label;
+            note.color = req.body.color;
+            console.log(note);    
             note.save();
+            res.redirect("/note");
+        }
+        catch(err){
+            console.log(err);
             res.redirect("/note");
         }
     });

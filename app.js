@@ -11,7 +11,6 @@ require("dotenv").config();
 const indexRoute         = require("./routes/index"),
       noteRoute          = require("./routes/note"),
       resetPasswordRoute = require("./routes/resetpass");
-    //   notificationRoute  = require("./routes/notification");
 
 mongoose.connect("mongodb://127.0.0.1/fliprHackathon",{ useUnifiedTopology: true ,useNewUrlParser:true});
 mongoose.set("useFindAndModify",false);
@@ -26,7 +25,6 @@ middleware(app);
 app.use("/",indexRoute);
 app.use("/",resetPasswordRoute);
 app.use("/note",noteRoute);
-// app.use("/notification",notificationRoute);
 
 app.listen(process.env.PORT||3000)
 {
