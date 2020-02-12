@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link as RouterLink} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField';
@@ -21,19 +22,26 @@ const styles={
     },
     paper: {
         marginTop: theme.spacing(8),
-        flexDirection: 'column',
-        alignItems: 'center'
+        borderRadius: '7px',
+        padding: theme.spacing(3)
       },
       avatar: {
-        margin: theme.spacing(1),
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
+      },
+      cardContent:{
+        display:'flex',
+        flexDirection: 'column',
+        alignItems:'center'
       },
       form: {
         width: '100%', // Fix IE 11 issue.
         // marginTop: theme.spacing(1),
       },
-      cardContent:{
-          margin: '0 auto'
+      grid:{
+          marginTop:theme.spacing(4),
+          marginBottom: theme.spacing(4)
       }
   };
 
@@ -41,55 +49,55 @@ class Login extends Component{
     render(){
         const {classes} = this.props;
         return(
-                <Container maxWidth="xs" classes={{ root:classes.root}} >
-                    <Card variant="outlined" className={classes.paper}>
-                        <CardContent className={classes.cardContent} >
-                            <Avatar className={classes.avatar}  >
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography variant="h5">
-                                Sign in
-                            </Typography>
-                            <Typography variant="subtitle1" >
-                                Use your Account
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <form className={classes.form} >
-                                <TextField 
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="email"  
-                                    label="Email"
-                                    type="email"
-                                    name="email"
-                                    autoComplete="email"
-                                    autoFocus
-                                    // error
-                                    // helperText="Couldn't find your account"
-                                />
-                                <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Create Account
-                                    </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                    >
-                                        Next
-                                    </Button>
-                                </Grid>
+            <Container maxWidth="xs" classes={{ root:classes.root}} >
+                <Card variant="outlined" className={classes.paper}>
+                    <CardContent className={classes.cardContent} >
+                        <Avatar className={classes.avatar}  >
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography variant="h5" >
+                            Sign in
+                        </Typography>
+                        <Typography variant="subtitle1" >
+                            Using your Account
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <form className={classes.form} >
+                            <TextField 
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"  
+                                label="Email"
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                // error
+                                // helperText="Couldn't find your account"
+                            />
+                            <Grid container className={classes.grid}>
+                            <Grid item xs>
+                                <Link component={RouterLink} to="/signup" variant="body2" className={classes.link} >
+                                    Create Account
+                                </Link>
                             </Grid>
-                            </form>
-                        </CardActions>
-                    </Card>
-                </Container>    
+                            <Grid item>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        </form>
+                    </CardActions>
+                </Card>
+            </Container>    
         )
     }
 }
