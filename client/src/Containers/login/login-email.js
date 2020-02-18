@@ -47,15 +47,25 @@ const styles={
 
 class Login extends Component{
     state={
-        email:null
+        email:" "
     }
+
+    componentDidMount(){
+        if(this.props.location.state){
+            this.setState({email:this.props.location.state.email});
+        }
+    }
+
     handleChange = event => {
         this.setState({email:event.target.value})
     };
 
     emailFormHandler=(event)=>{
         event.preventDefault();
-        console.log(this.state.email);
+        this.props.history.push({
+            pathname: "/signin/pwd",
+            state:{email:this.state.email}
+        });
     }
 
     render(){
@@ -82,6 +92,7 @@ class Login extends Component{
                                 required
                                 fullWidth
                                 id="email"  
+                                value={this.state.email}
                                 label="Email"
                                 type="email"
                                 autoComplete="email"
