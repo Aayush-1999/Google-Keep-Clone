@@ -24,28 +24,40 @@ const styles={
         marginTop: theme.spacing(8),
         borderRadius: '7px',
         padding: theme.spacing(3)
-      },
-      avatar: {
+    },
+    avatar: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
-      },
-      cardContent:{
+    },
+    cardContent:{
         display:'flex',
         flexDirection: 'column',
         alignItems:'center'
-      },
-      form: {
+    },
+    form: {
         width: '100%', // Fix IE 11 issue.
-        // marginTop: theme.spacing(1),
-      },
-      grid:{
-          marginTop:theme.spacing(4),
-          marginBottom: theme.spacing(4)
-      }
+    // marginTop: theme.spacing(1),
+    },
+    grid:{
+        marginTop:theme.spacing(4),
+        marginBottom: theme.spacing(4)
+    }
   };
 
 class Login extends Component{
+    state={
+        email:null
+    }
+    handleChange = event => {
+        this.setState({email:event.target.value})
+    };
+
+    emailFormHandler=(event)=>{
+        event.preventDefault();
+        console.log(this.state.email);
+    }
+
     render(){
         const {classes} = this.props;
         return(
@@ -55,7 +67,7 @@ class Login extends Component{
                         <Avatar className={classes.avatar}  >
                             <LockOutlinedIcon />
                         </Avatar>
-                        <Typography variant="h5" >
+                        <Typography variant="h5"    >
                             Sign in
                         </Typography>
                         <Typography variant="subtitle1" >
@@ -72,15 +84,16 @@ class Login extends Component{
                                 id="email"  
                                 label="Email"
                                 type="email"
-                                name="email"
                                 autoComplete="email"
                                 autoFocus
+                                onChange={this.handleChange}
                                 // error
                                 // helperText="Couldn't find your account"
                             />
                             <Grid container className={classes.grid}>
                             <Grid item xs>
-                                <Link component={RouterLink} to="/signup" variant="body2" className={classes.link} >
+                                <Link component={RouterLink} to="/signup" 
+                                    variant="body2" className={classes.link} >
                                     Create Account
                                 </Link>
                             </Grid>
@@ -89,6 +102,7 @@ class Login extends Component{
                                     type="submit"
                                     variant="contained"
                                     color="primary"
+                                    onClick={this.emailFormHandler}
                                 >
                                     Next
                                 </Button>
