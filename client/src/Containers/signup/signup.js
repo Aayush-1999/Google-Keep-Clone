@@ -72,40 +72,39 @@ class Login extends Component{
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                        <form className={classes.form} >
-                            <TextField 
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"  
-                                label="Email"
-                                type="email"
-                                autoComplete="email"
-                                autoFocus
-                                onChange={this.handleChange}
-                                // error
-                                // helperText="Couldn't find your account"
-                            />
-                            <Grid container className={classes.grid}>
-                            <Grid item xs>
-                                <Link component={RouterLink} to="/signup" 
-                                    variant="body2" className={classes.link} >
-                                    Create Account
-                                </Link>
+                                <form className={classes.form} >
+                                <TextField 
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    id="email"  
+                                    label="Email"
+                                    type="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                    onChange={this.handleChange}
+                                    // error
+                                    // helperText="Couldn't find your account"
+                                />
+                                <Grid container className={classes.grid}>
+                                <Grid item xs>
+                                    <Link component={RouterLink} to="/signup" 
+                                        variant="body2" className={classes.link} >
+                                        Create Account
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.emailFormHandler}
+                                    >
+                                        Next
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid item>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.emailFormHandler}
-                                >
-                                    Next
-                                </Button>
-                            </Grid>
-                        </Grid>
-                        </form>
+                            </form>
                     </CardActions>
                         </Grid>
                         <Grid item sm={0} lg={5}>
