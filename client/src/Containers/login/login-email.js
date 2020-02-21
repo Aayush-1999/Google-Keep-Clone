@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Link from '@material-ui/core/Link';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles, createMuiTheme} from '@material-ui/core/styles';  
@@ -23,7 +24,11 @@ const styles={
     paper: {
         marginTop: theme.spacing(8),
         borderRadius: '7px',
-        padding: theme.spacing(3)
+        // paddingTop:0,
+        // padding: theme.spacing(3),
+    },
+    cardBody:{
+        padding: theme.spacing(3),
     },
     avatar: {
         marginTop: theme.spacing(1),
@@ -47,7 +52,8 @@ const styles={
 
 class Login extends Component{
     state={
-        email:" "
+        email:" ",
+        progressBar:false
     }
 
     componentDidMount(){
@@ -62,17 +68,29 @@ class Login extends Component{
 
     emailFormHandler=(event)=>{
         event.preventDefault();
-        this.props.history.push({
-            pathname: "/signin/pwd",
-            state:{email:this.state.email}
-        });
+        console.log(this.state.progressBar)
+        this.setState({progressBar:true},()=>{
+            console.log(this.state.progressBar)
+            this.props.history.push({
+                pathname: "/signin/pwd",
+                state:{email:this.state.email}
+            });
+        })
+    }
+
+    componentWillUnmount(){
+        progress=<LinearProgress />
     }
 
     render(){
         const {classes} = this.props;
+        let progress=this.state.progressBar?<LinearProgress />:null
+
         return(
             <Container maxWidth="xs" classes={{ root:classes.root}} >
                 <Card variant="outlined" className={classes.paper}>
+                {progress}
+                <div className={classes.cardBody}>
                     <CardContent className={classes.cardContent} >
                         <Avatar className={classes.avatar}  >
                             <LockOutlinedIcon />
@@ -121,6 +139,7 @@ class Login extends Component{
                         </Grid>
                         </form>
                     </CardActions>
+                </div>
                 </Card>
             </Container>    
         )
