@@ -9,6 +9,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -31,7 +32,10 @@ const styles={
     paper: {
         marginTop: theme.spacing(8),
         borderRadius: '7px',
-        padding: theme.spacing(3)
+        // padding: theme.spacing(3)
+    },
+    cardBody:{
+        padding: theme.spacing(3),
     },
     avatar: {
         marginTop: theme.spacing(1),
@@ -58,7 +62,8 @@ const styles={
 class Login extends Component{
     state={
         password:"",
-        showPassword:false
+        showPassword:false,
+        progressBar:false
     }
     handleChange = event => {
         this.setState({password:event.target.value})
@@ -86,24 +91,27 @@ class Login extends Component{
 
     render(){
         const {classes} = this.props;
+        let progress=this.state.progressBar?<LinearProgress />:null
         return(
             <Container maxWidth="xs" classes={{ root:classes.root}} >
                 <Card variant="outlined" className={classes.paper}>
-                    <CardContent className={classes.cardContent} >
-                        <Avatar className={classes.avatar}  >
-                            <LockOutlinedIcon />
-                        </Avatar>
-                        <Typography variant="h5"    >
-                            Welcome
-                        </Typography>
-                        <Chip className={classes.chip}
-                            icon={<AccountCircleIcon />}
-                            label={this.props.history.location.state.email}
-                            onClick={this.handleGoBack}
-                            variant="outlined"
-                        />
-                    </CardContent>
-                    <CardActions>
+                    {progress}
+                    <div className={classes.cardBody} >
+                        <CardContent className={classes.cardContent} >
+                            <Avatar className={classes.avatar}  >
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography variant="h5"    >
+                                Welcome
+                            </Typography>
+                            <Chip className={classes.chip}
+                                icon={<AccountCircleIcon />}
+                                label={this.props.history.location.state.email}
+                                onClick={this.handleGoBack}
+                                variant="outlined"
+                            />
+                        </CardContent>
+                        <CardActions>
                         <FormControl fullWidth margin="normal" className={classes.form} variant="outlined">
                         <InputLabel htmlFor="password">Enter your password</InputLabel>
                         <OutlinedInput  id="password"
@@ -148,6 +156,7 @@ class Login extends Component{
                         </Grid>
                         </FormControl>
                     </CardActions>
+                    </div>
                 </Card>
             </Container>    
         )
