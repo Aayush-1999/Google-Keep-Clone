@@ -70,16 +70,22 @@ class Login extends Component{
         event.preventDefault();
         console.log(this.state.progressBar)
         this.setState({progressBar:true},()=>{
-            console.log(this.state.progressBar)
-            this.props.history.push({
-                pathname: "/signin/pwd",
-                state:{email:this.state.email}
-            });
+            setTimeout(()=>{
+                this.props.history.push({
+                    pathname: "/signin/pwd",
+                    state:{email:this.state.email}
+                });
+            },500)
+            // axios.post({
+            //     email:this.state.email
+            // })
+            // .then((response)=>{
+            //     console.log(response);
+            // })
+            // .catch((error)=>{
+            //     console.log(error);
+            // })
         })
-    }
-
-    componentWillUnmount(){
-        progress=<LinearProgress />
     }
 
     render(){
