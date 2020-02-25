@@ -73,7 +73,7 @@ class Login extends Component{
         // this.props.history.goBack();
         this.props.history.push({
             pathname: "/signin",
-            state:{email:this.props.history.location.state.email}
+            state:{email:this.props.location.state.email}
         })
     }
     handleClickShowPassword = () => {
