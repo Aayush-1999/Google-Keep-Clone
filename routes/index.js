@@ -3,15 +3,7 @@ const express      = require("express"),
       passport     = require("passport"),
       bcrypt       = require("bcrypt"),
       User         = require("../models/user");
-      
-router.get("/",(req,res)=>{
-    res.redirect("/note"); 
-});
 
-//SHOW REGISTER FORM
-router.get("/register",(req,res)=>{
-    res.render("register");
-});
 
 //REGISTER LOGIC ROUTE
 router.post("/register",async function(req,res){
@@ -36,10 +28,6 @@ router.post("/register",async function(req,res){
     }    
 });
 
-//SHOW LOGIN FORM
-router.get("/login",(req,res)=>{
-    res.render("login");
-});
 
 //LOCAL LOGIN LOGIC ROUTE
 router.post("/login",passport.authenticate("local",{ 
@@ -49,6 +37,10 @@ router.post("/login",passport.authenticate("local",{
         res.redirect("/");
 });
  
+router.post("/login/checkEmail",(req,res)=>{
+    let user = User.find({email:email})
+})
+
 //LOGOUT ROUTE
 router.get("/logout",(req,res)=>{
     req.logOut();
