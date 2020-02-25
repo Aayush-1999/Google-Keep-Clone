@@ -1,5 +1,6 @@
 const express               = require("express"),
       app                   = express(),
+      cors                  = require("cors"),
       bodyParser            = require("body-parser"),
       mongoose              = require("mongoose"),
       methodOverride        = require("method-override");
@@ -16,17 +17,19 @@ mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true ,useNewUrlPa
 mongoose.set("useFindAndModify",false);
 mongoose.set("useCreateIndex",true);
 
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.set("view engine","ejs");
 app.use(methodOverride("_method"));
 
 middleware(app);
 
 app.use("/",indexRoute);
-app.use("/",resetPasswordRoute);
-app.use("/note",noteRoute);
+// app.use("/",resetPasswordRoute);
+// app.use("/note",noteRoute);
 
-app.listen(process.env.PORT||5000)
+app.listen(5000)
 {
     console.log("Server has started");
 }
