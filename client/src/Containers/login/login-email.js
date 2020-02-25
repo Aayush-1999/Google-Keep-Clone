@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
+import axios from '../../axiosInstance';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField';
@@ -24,8 +25,6 @@ const styles={
     paper: {
         marginTop: theme.spacing(8),
         borderRadius: '7px',
-        // paddingTop:0,
-        // padding: theme.spacing(3),
     },
     cardBody:{
         padding: theme.spacing(3),
@@ -68,23 +67,25 @@ class Login extends Component{
 
     emailFormHandler=(event)=>{
         event.preventDefault();
-        console.log(this.state.progressBar)
+        console.log("reached here")
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
-                this.props.history.push({
-                    pathname: "/signin/pwd",
-                    state:{email:this.state.email}
-                });
+                axios.post("/login/checkEmail",{
+                    email:this.state.email
+                })
+                .then(response=>{
+                    console.log(response);
+                    if(response.status===200){
+                        this.props.history.push({
+                            pathname: "/signin/pwd",
+                            state:{email:this.state.email}
+                        });
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
             },500)
-            // axios.post({
-            //     email:this.state.email
-            // })
-            // .then((response)=>{
-            //     console.log(response);
-            // })
-            // .catch((error)=>{
-            //     console.log(error);
-            // })
         })
     }
 
