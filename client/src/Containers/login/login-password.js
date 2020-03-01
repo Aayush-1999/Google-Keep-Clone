@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
+import axios from '../../axiosInstance';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -89,10 +90,22 @@ class Login extends Component{
         console.log(this.state.password);
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
-                this.props.history.push({
-                    pathname: "/signup",
-                    state:{email:this.state.email}
-                });
+                axios.post("/login/checkPwd",{
+                    email:this.props.location.state.email,
+                    password:this.state.password
+                })
+                .then(response=>{
+                    console.log(response);
+                    if(response.status===200){
+                        this.props.history.push({
+                            pathname: "/dashboard",
+                            state:{user:response.data}
+                        });
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
             },500)
         })
     }
