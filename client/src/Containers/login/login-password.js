@@ -87,7 +87,6 @@ class Login extends Component{
 
     pwdFormHandler=(event)=>{
         event.preventDefault();
-        console.log(this.state.password);
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
                 axios.post("/login/checkPwd",{

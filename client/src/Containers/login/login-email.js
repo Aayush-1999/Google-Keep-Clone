@@ -67,7 +67,6 @@ class Login extends Component{
 
     emailFormHandler=(event)=>{
         event.preventDefault();
-        console.log("reached here")
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
                 axios.post("/login/checkEmail",{
