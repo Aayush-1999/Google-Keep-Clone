@@ -1,5 +1,5 @@
 const LocalStrategy = require("passport-local"),
-      bcrypt        = require("bcrypt"),
+      bcrypt        = require("bcryptjs"),
       User          = require("../../models/user");
 
 module.exports = passport =>{
@@ -21,7 +21,6 @@ module.exports = passport =>{
               if(result) return done(null, user);
 
               else return done(null, false, { message: 'Incorrect password.' });
-
             });
           }); 
         }
