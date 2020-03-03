@@ -1,9 +1,7 @@
 const express       = require("express");
       path          = require("path"),
-      flash         = require("connect-flash"),
       compression   = require("compression"),  
       passportSetup = require("./passport/setup"),
-      User          = require("../models/user");
 
 module.exports = app => {
 
@@ -20,15 +18,6 @@ module.exports = app => {
 
     passportSetup(app);
     
-    app.use(flash());
-    app.use(async function(req,res,next){
-        res.locals.currentUser = req.user;
-        res.locals.error  =  req.flash("error");
-        res.locals.success  =  req.flash("success");
-    
-        next();
-     });
-
     app.use(express.static(path.join(__dirname,"../public")));
     app.use(express.static(path.join(__dirname,"../node_modules/materialize-css/dist")));
     app.use(express.static(path.join(__dirname,"../node_modules/animate.css")));
