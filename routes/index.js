@@ -37,7 +37,7 @@ const express      = require("express"),
  
 router.post("/login/checkEmail",async(req,res)=>{
     try{
-        let user = await User.find({email:req.body.email})
+        let user = await User.findOne({email:req.body.email})
         if(user!=null) res.status(200).send("user email found")
         else res.status(404).send("email not found");
     }
