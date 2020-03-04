@@ -47,16 +47,15 @@ router.post("/login/checkEmail",async(req,res)=>{
 })
 
 //add password matching code
-router.post("/login/checkPwd",async (req.res)=>{
-    try{
-
-    }
-})
+router.post("/login/checkPwd",passport.authenticate("local"),(req, res) => {
+    let userInfo = req.user;
+    res.send(userInfo);
+});
 
 //LOGOUT ROUTE
 router.get("/logout",(req,res)=>{
     req.logOut();
-    res.redirect("/login");
+    res.status(200).send("logout uccessful");
 });
 
 module.exports=router;

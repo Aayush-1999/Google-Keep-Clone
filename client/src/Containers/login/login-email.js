@@ -52,7 +52,9 @@ const styles={
 class Login extends Component{
     state={
         email:" ",
-        progressBar:false
+        progressBar:false,
+        error:false,
+        helperText:""
     }
 
     componentDidMount(){
@@ -82,7 +84,12 @@ class Login extends Component{
                     }
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    if(error.response){
+                        this.setState({progressBar:false,error:true,helperText:"Couldn't find your account"})
+                    }
+                    else{
+                        console.log(error);
+                    }
                 })
             },500)
         })
@@ -122,8 +129,8 @@ class Login extends Component{
                                 autoComplete="email"
                                 autoFocus
                                 onChange={this.handleChange}
-                                // error
-                                // helperText="Couldn't find your account"
+                                error={this.state.error}
+                                helperText={this.state.helperText}
                             />
                             <Grid container className={classes.grid}>
                             <Grid item xs>
