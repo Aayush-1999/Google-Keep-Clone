@@ -6,6 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -64,14 +65,15 @@ class Login extends Component{
     state={
         password:"",
         showPassword:false,
-        progressBar:false
+        progressBar:false,
+        error:false,
+        helperText:""
     }
     handleChange = event => {
         this.setState({password:event.target.value})
     }
 
     handleGoBack=()=>{
-        // this.props.history.goBack();
         this.props.history.push({
             pathname: "/signin",
             state:{email:this.props.location.state.email}
@@ -103,7 +105,16 @@ class Login extends Component{
                     }
                 })
                 .catch((error)=>{
-                    console.log(error);
+                    if(error.response){
+                        this.setState({
+                                progressBar:false,
+                                error:true,
+                                helperText:"Wrong password. Try again or click Forgot password to reset it"
+                            })
+                    }
+                    else{
+                        console.log(error);
+                    }
                 })
             },500)
         })
@@ -132,31 +143,34 @@ class Login extends Component{
                             />
                         </CardContent>
                         <CardActions>
-                        <FormControl fullWidth margin="normal" className={classes.form} variant="outlined">
-                        <InputLabel htmlFor="password">Enter your password</InputLabel>
-                        <OutlinedInput  id="password"
-                                required
-                                autoFocus
-                                type={this.state.showPassword ? 'text' : 'password'}
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={this.handleClickShowPassword}
-                                        onMouseDown={this.handleMouseDownPassword}
-                                        edge="end"
-                                      >
-                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                                      </IconButton>
-                                    </InputAdornment>
-                                }
-                                labelWidth={150}
-                                // error
-                                // helperText="Couldn't find your account"
-                            />
-                            <Grid container className={classes.grid}>
+                            <FormControl fullWidth margin="normal" 
+                                className={classes.form} variant="outlined"
+                                error={this.state.error}
+                            >
+                                <InputLabel htmlFor="password">Enter your password</InputLabel>
+                                <OutlinedInput id="password"
+                                    required
+                                    autoFocus
+                                    type={this.state.showPassword ? 'text' : 'password'}
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={this.handleClickShowPassword}
+                                            onMouseDown={this.handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    labelWidth={150}
+                                    error={this.state.error}
+                                />
+                                <FormHelperText id="password" error={this.state.error} >{this.state.helperText}</FormHelperText>
+                                <Grid container className={classes.grid}>
                             <Grid item xs>
                                 <Link component={RouterLink} to="/forgotpwd" 
                                     variant="body2" className={classes.link} >
@@ -174,8 +188,8 @@ class Login extends Component{
                                 </Button>
                             </Grid>
                         </Grid>
-                        </FormControl>
-                    </CardActions>
+                            </FormControl>
+                        </CardActions>
                     </div>
                 </Card>
             </Container>    
