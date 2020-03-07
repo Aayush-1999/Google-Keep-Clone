@@ -1,40 +1,30 @@
 const express      = require("express"),
       router       = express.Router(),
+      bcrypt       = require("bcryptjs"),
       passport     = require("passport"),
       User         = require("../models/user");
 
-//REGISTER LOGIC ROUTE
-// router.post("/register",async function(req,res){
-//     try{
-//         let saltRounds=10,hashcode;    
-//         hashcode = await bcrypt.hash(req.body.password, saltRounds)
-//         let user = await User.create({
-//             firstName:req.body.firstname,
-//             lastName:req.body.lastname,
-//             displayName:req.body.firstname + " " + req.body.lastname,
-//             email:req.body.email,
-//             password:hashcode,
-//             image:"https://res.cloudinary.com/image-storage/image/upload/v1572009434/blank-avatar_opbhgx.png"
-//         }); 
-//         req.logIn(user,function(err){  
-//             res.redirect("/");
-//         });                   
-//     }
-//     catch(err){
-//         req.flash("error","This Email is already registered");
-//         res.redirect("/register");
-//     }    
-// });
+//REGISTER ROUTE
+router.post("/register",async function(req,res){
+    try{
+        let salt = bcrypt.genSaltSync(10);
+        let hash = bcrypt.hashSync(req.body.password, salt);
+        let user = await User.create({
+            firstName:req.body.firstname,
+            lastName:req.body.lastname,
+            displayName:req.body.firstname + " " + req.body.lastname,
+            email:req.body.email,
+            password:hash,
+            image:"https://res.cloudinary.com/image-storage/image/upload/v1572009434/blank-avatar_opbhgx.png"
+        });
+        res.status(200).send(user);
+    }
+    catch(err){
+        res.status(400).send("registeration unsuccessful");
+    }    
+});
 
-
-//LOCAL LOGIN LOGIC ROUTE
-// router.post("/login",passport.authenticate("local",{ 
-//         failureRedirect:"/login",
-//         failureFlash:"Invalid email or password"
-//     }),(req,res)=>{
-//         res.redirect("/");
-// });
- 
+//LOGIN ROUTE - CHECK EMAIL 
 router.post("/login/checkEmail",async(req,res)=>{
     try{
         let user = await User.findOne({email:req.body.email})
@@ -46,7 +36,7 @@ router.post("/login/checkEmail",async(req,res)=>{
     }
 })
 
-//add password matching code
+//LOGIN ROUTE- VERIFY PASSWORD
 router.post("/login/checkPwd",passport.authenticate("local"),(req, res) => {
     let userInfo = req.user;
     res.send(userInfo);
