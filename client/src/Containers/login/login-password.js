@@ -18,7 +18,6 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles, createMuiTheme} from '@material-ui/core/styles';  
@@ -58,6 +57,9 @@ const styles={
     grid:{
         marginTop:theme.spacing(4),
         marginBottom: theme.spacing(4)
+    },
+    label:{
+        textTransform:'none'
     }
   };
 
@@ -171,12 +173,10 @@ class Login extends Component{
                                 />
                                 <FormHelperText id="password" error={this.state.error} >{this.state.helperText}</FormHelperText>
                                 <Grid container className={classes.grid}>
-                            <Grid item xs>
-                                <Link component={RouterLink} to="/forgotpwd" 
-                                    variant="body2" className={classes.link} >
-                                    Forgot Password
-                                </Link>
-                            </Grid>
+                                    <Grid item xs>
+                                        <Button color="primary" component={RouterLink} className={classes.label} 
+                                        to="/forgotpws">Forgot password</Button>
+                                </Grid>
                             <Grid item>
                                 <Button
                                     type="submit"
