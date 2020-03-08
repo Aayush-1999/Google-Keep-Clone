@@ -101,7 +101,7 @@ class Login extends Component{
                     console.log(response);
                     if(response.status===200){
                         this.props.history.push({
-                            pathname: "/dashboard",
+                            pathname: "/home",
                             state:{user:response.data}
                         });
                     }
