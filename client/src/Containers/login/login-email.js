@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
 import axios from '../../axiosInstance';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -96,6 +95,15 @@ class Login extends Component{
         })
     }
 
+    buttonClickHandler=(event)=>{
+        event.preventDefault();
+        this.setState({progressBar:true},()=>{
+            setTimeout(()=>{
+                this.props.history.push("/signup")
+            },200)
+        })
+    }
+
     render(){
         const {classes} = this.props;
         let progress=this.state.progressBar?<LinearProgress />:null
@@ -135,8 +143,8 @@ class Login extends Component{
                             />
                             <Grid container className={classes.grid}>
                             <Grid item xs>
-                                <Button color="primary" component={RouterLink} className={classes.label} 
-                                to="/signup">Create account</Button>
+                                <Button color="primary"className={classes.label} onClick={this.buttonClickHandler} 
+                                >Create account</Button>
                             </Grid>
                             <Grid item>
                                 <Button
