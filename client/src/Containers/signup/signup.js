@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import axios from '../../axiosInstance';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -38,7 +39,6 @@ const styles={
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-    // marginTop: theme.spacing(1),
     },
     grid:{
         marginTop:theme.spacing(4),
@@ -48,15 +48,48 @@ const styles={
 
 class Login extends Component{
     state={
-        email:null
+        user:{
+            firstName:null,
+            lastName:null,
+            email:null,
+            password:null
+        }
     }
-    handleChange = event => {
-        this.setState({email:event.target.value})
+    handleChange = (event,key) => {
+        const newUser={...this.state.user}
+        newUser.key=event.target.value
+        this.setState({user:newUser})
     };
 
     emailFormHandler=(event)=>{
         event.preventDefault();
-        console.log(this.state.email);
+        this.setState({progressBar:true},()=>{
+            setTimeout(()=>{
+                axios.post("/register",{
+                    firstName:this.state.user.firstName,
+                    lastName:this.state.user.lastName,
+                    email:this.state.user.email,
+                    password:this.state.user.password
+                })
+                .then(response=>{
+                    console.log(response);
+                    if(response.status===200){
+                        this.props.history.push({
+                            pathname: "/home",
+                            state:{user:response.data}
+                        });
+                    }
+                })
+                .catch((error)=>{
+                    if(error.response){
+                        this.setState({progressBar:false,error:true,helperText:"Couldn't find your account"})
+                    }
+                    else{
+                        console.log(error);
+                    }
+                })
+            },500)
+        })
     }
 
     render(){
