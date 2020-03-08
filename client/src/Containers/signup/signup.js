@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import axios from '../../axiosInstance';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Link from '@material-ui/core/Link';
-import Avatar from '@material-ui/core/Avatar';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles, createMuiTheme} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
 import Icon from '@material-ui/core/Icon';
@@ -19,18 +16,13 @@ import AcUnitIcon from '@material-ui/icons/AcUnit';
 const theme=createMuiTheme();
 
 const styles={
-    root:{
-        maxWidth:'57%'
-    },
-    paper: {
-        marginTop: theme.spacing(8),
-        borderRadius: '7px',
-        padding: theme.spacing(3)
-    },
     avatar: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
+    },
+    cardBody:{
+        padding: theme.spacing(3)
     },
     cardContent:{
         // display:'flex',
@@ -43,6 +35,16 @@ const styles={
     grid:{
         marginTop:theme.spacing(4),
         marginBottom: theme.spacing(4)
+    },
+    label:{
+        textTransform:'none'
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        borderRadius: '7px',
+    },
+    root:{
+        maxWidth:'57%'
     }
   };
 
@@ -52,8 +54,10 @@ class Login extends Component{
             firstName:null,
             lastName:null,
             email:null,
-            password:null
-        }
+            password:null,
+            confirm:null
+        },
+        progressBar:false
     }
     handleChange = (event,key) => {
         const newUser={...this.state.user}
@@ -92,12 +96,25 @@ class Login extends Component{
         })
     }
 
+    buttonClickHandler=(event)=>{
+        event.preventDefault();
+        this.setState({progressBar:true},()=>{
+            setTimeout(()=>{
+                this.props.history.push("/signin")
+            },200)
+        })
+    }
+
     render(){
         const {classes} = this.props;
+        let progress=this.state.progressBar?<LinearProgress />:null
+
         return(
             <Container maxWidth="sm" classes={{ root:classes.root}} >
                 <Card variant="outlined" className={classes.paper}>
-                    <Grid container spacing={3}>
+                    {progress}
+                    <div className={classes.cardBody}>
+                        <Grid container spacing={3}>
                         <Grid item sm={12} lg={7}>
                             <CardContent className={classes.cardContent} >
                                 <Typography variant="h5"    >
@@ -106,25 +123,74 @@ class Login extends Component{
                             </CardContent>
                             <CardActions>
                                 <form className={classes.form} >
-                                <TextField 
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    id="email"  
-                                    label="Email"
-                                    type="email"
-                                    autoComplete="email"
-                                    autoFocus
-                                    onChange={this.handleChange}
-                                    // error
-                                    // helperText="Couldn't find your account"
-                                />
+                                    <Grid container spacing={2}>
+                                        <Grid item sm={12} lg={6}>
+                                            <TextField 
+                                                variant="outlined"
+                                                margin="normal"
+                                                id="First name"  
+                                                label="First name"
+                                                type="text"
+                                                autoFocus
+                                                size="small"
+                                                onChange={(event)=>this.handleChange(event,"firstName")}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={12} lg={6}>
+                                            <TextField 
+                                                variant="outlined"
+                                                margin="normal"
+                                                id="Last name"  
+                                                label="Last name"
+                                                type="text"
+                                                size="small"
+                                                onChange={(event)=>this.handleChange(event,"lastName")}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <TextField 
+                                        variant="outlined"
+                                        margin="normal"
+                                        id="Username"  
+                                        label="Username"
+                                        type="text"
+                                        size="small"
+                                        onChange={(event)=>this.handleChange(event,"email")}
+                                    />
+                                    <Typography component="div" variant="caption">
+                                        You can use letter, numbetrs & periods
+                                    </Typography>
+                                    <Grid container spacing={2}>
+                                        <Grid item sm={12} lg={6}>
+                                            <TextField 
+                                                variant="outlined"
+                                                margin="normal"
+                                                id="Password"  
+                                                label="Password"
+                                                type="text"
+                                                size="small"
+                                                onChange={(event)=>this.handleChange(event,"password")}
+                                            />
+                                        </Grid>
+                                        <Grid item sm={12} lg={6}>
+                                            <TextField 
+                                                variant="outlined"
+                                                margin="normal"
+                                                id="Confirm"  
+                                                label="Confirm"
+                                                type="text"
+                                                size="small"
+                                                onChange={(event)=>this.handleChange(event,"confirmPassword")}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Typography variant="caption">
+                                        Use 8 or more characters with a mix of letters, numbers & symbols
+                                    </Typography>
                                 <Grid container className={classes.grid}>
                                 <Grid item xs>
-                                    <Link component={RouterLink} to="/signup" 
-                                        variant="body2" className={classes.link} >
-                                        Create Account
-                                    </Link>
+                                    <Button color="primary"className={classes.label} onClick={this.buttonClickHandler} 
+                                    >Sign in instead</Button>
                                 </Grid>
                                 <Grid item>
                                     <Button
@@ -146,6 +212,7 @@ class Login extends Component{
                             </Icon>
                         </Grid>
                     </Grid>
+                    </div>
                 </Card>
             </Container>    
         )
