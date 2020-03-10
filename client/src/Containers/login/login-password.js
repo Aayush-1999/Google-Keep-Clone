@@ -20,20 +20,23 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import { withStyles, createMuiTheme} from '@material-ui/core/styles';  
+import { withStyles} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
- 
-const theme=createMuiTheme();
 
-const styles={
+const styles=theme=>({
     root:{
         paddingLeft:'0px',
         paddingRight:'0px'
     },
     paper: {
-        marginTop: theme.spacing(8),
-        borderRadius: '7px',
-        // padding: theme.spacing(3)
+        [theme.breakpoints.down('sm')]:{
+            border:'none'
+        },
+        [theme.breakpoints.up('sm')]:{
+            marginTop: theme.spacing(8),
+            border:'1px solid rgba(0,0,0,0.12)',
+            borderRadius: '7px',
+        } 
     },
     cardBody:{
         padding: theme.spacing(3),
@@ -61,7 +64,7 @@ const styles={
     label:{
         textTransform:'none'
     }
-  };
+  });
 
 class Login extends Component{
     state={
