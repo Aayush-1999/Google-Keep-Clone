@@ -8,8 +8,10 @@ class App extends Component{
   render(){
     return(
       <div>
+        <Route path="/" exact>
+          <Redirect to="/signin" />
+        </Route>
         <Route path="/signin" exact component={LoginEmail} />
-        <Redirect from="/" to="/signin" />
         <Route path="/signin/pwd" exact component={LoginPassword} />
         <Route path="/signup" exact component={SignUp} />
       </div>
