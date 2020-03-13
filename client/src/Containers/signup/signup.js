@@ -5,17 +5,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { withStyles, createMuiTheme} from '@material-ui/core/styles';  
+import { withStyles} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
 import Icon from '@material-ui/core/Icon';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
  
-const theme=createMuiTheme();
-
-const styles={
+const styles=theme=>({
     avatar: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(2),
@@ -40,15 +39,27 @@ const styles={
         textTransform:'none'
     },
     paper: {
-        marginTop: theme.spacing(8),
-        borderRadius: '7px',
+        [theme.breakpoints.down('sm')]:{
+            border:'none'
+        },
+        [theme.breakpoints.up('sm')]:{
+            marginTop: theme.spacing(8),
+            border:'1px solid rgba(0,0,0,0.12)',
+            borderRadius: '7px',
+        },
     },
     root:{
-        maxWidth:'57%'
+        [theme.breakpoints.up('md')]:{
+            width:'750px'
+        },
+        [theme.breakpoints.between('sm','md')]:{
+            width:'450px'
+        }
     }
-  };
 
-class Login extends Component{
+  });
+
+class SignUp extends Component{
     state={
         user:{
             firstName:null,
@@ -59,13 +70,14 @@ class Login extends Component{
         },
         progressBar:false
     }
+
     handleChange = (event,key) => {
         const newUser={...this.state.user}
         newUser.key=event.target.value
         this.setState({user:newUser})
     };
 
-    emailFormHandler=(event)=>{
+    formHandler=(event)=>{
         event.preventDefault();
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
@@ -96,7 +108,7 @@ class Login extends Component{
         })
     }
 
-    buttonClickHandler=(event)=>{
+    signInButtonHandler=(event)=>{
         event.preventDefault();
         this.setState({progressBar:true},()=>{
             setTimeout(()=>{
@@ -110,101 +122,112 @@ class Login extends Component{
         let progress=this.state.progressBar?<LinearProgress />:null
 
         return(
-            <Container maxWidth="sm" classes={{ root:classes.root}} >
+            <Container maxWidth="sm" className={classes.root} >
                 <Card variant="outlined" className={classes.paper}>
                     {progress}
                     <div className={classes.cardBody}>
                         <Grid container spacing={3}>
-                        <Grid item sm={12} lg={7}>
-                            <CardContent className={classes.cardContent} >
-                                <Typography variant="h5"    >
-                                    Create your Account
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <form className={classes.form} >
-                                    <Grid container spacing={2}>
-                                        <Grid item sm={12} lg={6}>
-                                            <TextField 
-                                                variant="outlined"
-                                                margin="normal"
-                                                id="First name"  
-                                                label="First name"
-                                                type="text"
-                                                autoFocus
-                                                size="small"
-                                                onChange={(event)=>this.handleChange(event,"firstName")}
-                                            />
-                                        </Grid>
-                                        <Grid item sm={12} lg={6}>
-                                            <TextField 
-                                                variant="outlined"
-                                                margin="normal"
-                                                id="Last name"  
-                                                label="Last name"
-                                                type="text"
-                                                size="small"
-                                                onChange={(event)=>this.handleChange(event,"lastName")}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                    <TextField 
-                                        variant="outlined"
-                                        margin="normal"
-                                        id="Username"  
-                                        label="Username"
-                                        type="text"
-                                        size="small"
-                                        onChange={(event)=>this.handleChange(event,"email")}
-                                    />
-                                    <Typography component="div" variant="caption">
-                                        You can use letter, numbetrs & periods
+                            <Grid item sm={12} lg={7}>
+                                <CardContent className={classes.cardContent} >
+                                    <Typography variant="h5"    >
+                                        Create your Account
                                     </Typography>
-                                    <Grid container spacing={2}>
-                                        <Grid item sm={12} lg={6}>
-                                            <TextField 
-                                                variant="outlined"
-                                                margin="normal"
-                                                id="Password"  
-                                                label="Password"
-                                                type="text"
-                                                size="small"
-                                                onChange={(event)=>this.handleChange(event,"password")}
-                                            />
+                                </CardContent>
+                                <CardActions>
+                                    <form className={classes.form} >
+                                        <Grid container spacing={2}>
+                                            <Grid item sm={12} lg={6}>
+                                                <TextField  
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    margin="normal"
+                                                    id="First name"  
+                                                    label="First name"
+                                                    type="text"
+                                                    autoFocus
+                                                    size="small"
+                                                    onChange={(event)=>this.handleChange(event,"firstName")}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={12} lg={6}>
+                                                <TextField 
+                                                    variant="outlined"
+                                                    fullWidth
+                                                    margin="normal"
+                                                    id="Last name"  
+                                                    label="Last name"
+                                                    type="text"
+                                                    size="small"
+                                                    onChange={(event)=>this.handleChange(event,"lastName")}
+                                                />
+                                            </Grid>
                                         </Grid>
-                                        <Grid item sm={12} lg={6}>
-                                            <TextField 
-                                                variant="outlined"
-                                                margin="normal"
-                                                id="Confirm"  
-                                                label="Confirm"
-                                                type="text"
-                                                size="small"
-                                                onChange={(event)=>this.handleChange(event,"confirmPassword")}
-                                            />
+                                        <TextField 
+                                            variant="outlined"
+                                            margin="normal"
+                                            fullWidth
+                                            id="Username"  
+                                            label="Username"
+                                            type="text"
+                                            size="small"
+                                            InputProps={{
+                                                endAdornment: 
+                                                <InputAdornment position="end">@gmail.com</InputAdornment>,
+                                              }}
+                                            onChange={(event)=>this.handleChange(event,"email")}
+                                        />
+                                        <Typography component="div" variant="caption">
+                                            You can use letter, numbetrs & periods
+                                        </Typography>
+                                        <Grid container spacing={2}>
+                                            <Grid item sm={10} lg={5}>
+                                                <TextField 
+                                                    variant="outlined"
+                                                    margin="normal"
+                                                    fullWidth
+                                                    id="Password"  
+                                                    label="Password"
+                                                    type="text"
+                                                    size="small"
+                                                    onChange={(event)=>this.handleChange(event,"password")}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={10} lg={5}>
+                                                <TextField 
+                                                    variant="outlined"
+                                                    margin="normal"
+                                                    id="Confirm"  
+                                                    fullWidth
+                                                    label="Confirm"
+                                                    type="text"
+                                                    size="small"
+                                                    onChange={(event)=>this.handleChange(event,"confirmPassword")}
+                                                />
+                                            </Grid>
+                                            <Grid item sm={2} lg={2}>
+                                            </Grid>
                                         </Grid>
+                                        <Typography variant="caption">
+                                            Use 8 or more characters with a mix of letters, numbers & symbols
+                                        </Typography>
+                                        <Grid container className={classes.grid}>
+                                        <Grid item xs>
+                                            <Button color="primary"className={classes.label} onClick={this.signInButtonHandler} 
+                                            >Sign in instead</Button>
+                                        </Grid>
+                                        <Grid item>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.formHandler}
+                                        >
+                                            Next
+                                        </Button>
                                     </Grid>
-                                    <Typography variant="caption">
-                                        Use 8 or more characters with a mix of letters, numbers & symbols
-                                    </Typography>
-                                <Grid container className={classes.grid}>
-                                <Grid item xs>
-                                    <Button color="primary"className={classes.label} onClick={this.buttonClickHandler} 
-                                    >Sign in instead</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.emailFormHandler}
-                                    >
-                                        Next
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                            </form>
-                    </CardActions>
+                                    </Grid>
+                                </form>
+                            </CardActions>
                         </Grid>
                         <Grid item sm={0} lg={5}>
                             <Icon color="primary" fontSize="large">
@@ -219,4 +242,4 @@ class Login extends Component{
     }
 }
 
-export default  withStyles(styles)(Login);
+export default  withStyles(styles)(SignUp);
