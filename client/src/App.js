@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route , Redirect} from 'react-router-dom';
-import LoginEmail from './Containers/login/login-email';
-import LoginPassword from './Containers/login/login-password';
+import LoginEmail from './Containers/login/email/login-email';
+import LoginPassword from './Containers/login/password/login-password';
 import SignUp from './Containers/signup/signup';
 
 class App extends Component{
