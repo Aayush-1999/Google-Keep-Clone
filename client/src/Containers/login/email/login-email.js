@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from '../../axiosInstance';
+import axios from '../../../axiosInstance';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField';
@@ -12,48 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
- 
-// const theme=createMuiTheme();
-
-const styles=theme=>({
-    root:{
-        paddingLeft:'0px',
-        paddingRight:'0px'
-    },
-    paper: {
-        [theme.breakpoints.down('sm')]:{
-            border:'none'
-        },
-        [theme.breakpoints.up('sm')]:{
-            marginTop: theme.spacing(8),
-            border:'1px solid rgba(0,0,0,0.12)',
-            borderRadius: '7px',
-        } 
-    },
-    cardBody:{
-        padding: theme.spacing(3),
-    },
-    avatar: {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(2),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    cardContent:{
-        display:'flex',
-        flexDirection: 'column',
-        alignItems:'center'
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-    },
-    grid:{
-        marginTop:theme.spacing(4),
-        marginBottom: theme.spacing(4)
-    },
-    label:{
-        textTransform:'none'
-    }
-  });
+import styles from './login-email.styles';
 
 class Login extends Component{
     state={
