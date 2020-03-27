@@ -13,51 +13,7 @@ import { withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Icon from '@material-ui/core/Icon';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
- 
-const styles=theme=>({
-    avatar: {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(2),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    cardBody:{
-        padding: theme.spacing(3)
-    },
-    cardContent:{
-        // display:'flex',
-        // flexDirection: 'column',
-        // alignItems:'center'
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-    },
-    grid:{
-        marginTop:theme.spacing(4),
-        marginBottom: theme.spacing(4)
-    },
-    label:{
-        textTransform:'none'
-    },
-    paper: {
-        [theme.breakpoints.down('sm')]:{
-            border:'none'
-        },
-        [theme.breakpoints.up('sm')]:{
-            marginTop: theme.spacing(8),
-            border:'1px solid rgba(0,0,0,0.12)',
-            borderRadius: '7px',
-        },
-    },
-    root:{
-        [theme.breakpoints.up('md')]:{
-            width:'750px'
-        },
-        [theme.breakpoints.between('sm','md')]:{
-            width:'450px'
-        }
-    }
-
-  });
+import styles from './signup.styles';
 
 class SignUp extends Component{
     state={
@@ -104,7 +60,7 @@ class SignUp extends Component{
                         console.log(error);
                     }
                 })
-            },500)
+            },1500)
         })
     }
 
@@ -122,12 +78,12 @@ class SignUp extends Component{
         let progress=this.state.progressBar?<LinearProgress />:null
 
         return(
-            <Container maxWidth="sm" className={classes.root} >
+            <Container maxWidth="md" disableGutters className={classes.root} >
                 <Card variant="outlined" className={classes.paper}>
                     {progress}
                     <div className={classes.cardBody}>
                         <Grid container spacing={3}>
-                            <Grid item sm={12} lg={7}>
+                            <Grid item sm={12} md={7}>
                                 <CardContent className={classes.cardContent} >
                                     <Typography variant="h5"    >
                                         Create your Account
@@ -136,7 +92,7 @@ class SignUp extends Component{
                                 <CardActions>
                                     <form className={classes.form} >
                                         <Grid container spacing={2}>
-                                            <Grid item sm={12} lg={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <TextField  
                                                     fullWidth
                                                     variant="outlined"
@@ -149,7 +105,7 @@ class SignUp extends Component{
                                                     onChange={(event)=>this.handleChange(event,"firstName")}
                                                 />
                                             </Grid>
-                                            <Grid item sm={12} lg={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <TextField 
                                                     variant="outlined"
                                                     fullWidth
@@ -180,7 +136,7 @@ class SignUp extends Component{
                                             You can use letter, numbetrs & periods
                                         </Typography>
                                         <Grid container spacing={2}>
-                                            <Grid item sm={10} lg={5}>
+                                            <Grid item xs={10} sm={5}>
                                                 <TextField 
                                                     variant="outlined"
                                                     margin="normal"
@@ -192,7 +148,7 @@ class SignUp extends Component{
                                                     onChange={(event)=>this.handleChange(event,"password")}
                                                 />
                                             </Grid>
-                                            <Grid item sm={10} lg={5}>
+                                            <Grid item xs={10} sm={5}>
                                                 <TextField 
                                                     variant="outlined"
                                                     margin="normal"
@@ -204,37 +160,35 @@ class SignUp extends Component{
                                                     onChange={(event)=>this.handleChange(event,"confirmPassword")}
                                                 />
                                             </Grid>
-                                            <Grid item sm={2} lg={2}>
+                                            <Grid item xs={2}>
                                             </Grid>
                                         </Grid>
                                         <Typography variant="caption">
                                             Use 8 or more characters with a mix of letters, numbers & symbols
                                         </Typography>
                                         <Grid container className={classes.grid}>
-                                        <Grid item xs>
-                                            <Button color="primary"className={classes.label} onClick={this.signInButtonHandler} 
-                                            >Sign in instead</Button>
+                                            <Grid item xs>
+                                                <Button color="primary"className={classes.label} onClick={this.signInButtonHandler} 
+                                                >Sign in instead</Button>
+                                            </Grid>
+                                            <Grid item>
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={this.formHandler}
+                                                >Next</Button>
                                         </Grid>
-                                        <Grid item>
-                                        <Button
-                                            type="submit"
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={this.formHandler}
-                                        >
-                                            Next
-                                        </Button>
-                                    </Grid>
                                     </Grid>
                                 </form>
                             </CardActions>
                         </Grid>
-                        <Grid item sm={0} lg={5}>
-                            <Icon color="primary" fontSize="large">
-                                <AcUnitIcon />
-                            </Icon>
+                            <Grid item md={5} className={classes.accountImage} >
+                                <Icon color="primary" fontSize="large">
+                                    <AcUnitIcon />
+                                </Icon>
+                            </Grid>
                         </Grid>
-                    </Grid>
                     </div>
                 </Card>
             </Container>    
