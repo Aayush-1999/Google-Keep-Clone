@@ -11,8 +11,12 @@ import CardContent from '@material-ui/core/CardContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
-import Icon from '@material-ui/core/Icon';
-import AcUnitIcon from '@material-ui/icons/AcUnit';
+import IconButton from '@material-ui/core/IconButton';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';  
+import FormControl from '@material-ui/core/FormControl';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import styles from './signup.styles';
 
 class SignUp extends Component{
@@ -24,14 +28,23 @@ class SignUp extends Component{
             password:null,
             confirm:null
         },
-        progressBar:false
+        progressBar:false,
+        showPassword:false
     }
 
     handleChange = (event,key) => {
         const newUser={...this.state.user}
         newUser.key=event.target.value
         this.setState({user:newUser})
-    };
+    }
+
+    handleClickShowPassword = () => {
+        this.setState({showPassword: !this.state.showPassword });
+    }
+    
+    handleMouseDownPassword = event => {
+        event.preventDefault();
+    }
 
     formHandler=(event)=>{
         event.preventDefault();
@@ -136,31 +149,40 @@ class SignUp extends Component{
                                             You can use letter, numbetrs & periods
                                         </Typography>
                                         <Grid container spacing={2}>
-                                            <Grid item xs={10} sm={5}>
-                                                <TextField 
-                                                    variant="outlined"
-                                                    margin="normal"
-                                                    fullWidth
-                                                    id="Password"  
-                                                    label="Password"
-                                                    type="text"
-                                                    size="small"
+                                            <Grid item xs={10} sm={6}>
+                                            <FormControl size='small' variant="outlined" margin="normal">
+                                                <InputLabel htmlFor="password">Password</InputLabel>
+                                                <OutlinedInput id="password"
+                                                    type={this.state.showPassword ? 'text' : 'password'}
+                                                    value={this.state.user.password}
                                                     onChange={(event)=>this.handleChange(event,"password")}
+                                                    endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={this.handleClickShowPassword}
+                                                            onMouseDown={this.handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                    }
+                                                    labelWidth={74}
                                                 />
+                                            </FormControl>
                                             </Grid>
-                                            <Grid item xs={10} sm={5}>
+                                            <Grid item xs={10} sm={6}>
                                                 <TextField 
                                                     variant="outlined"
                                                     margin="normal"
-                                                    id="Confirm"  
                                                     fullWidth
+                                                    id="Confirm"  
                                                     label="Confirm"
                                                     type="text"
                                                     size="small"
                                                     onChange={(event)=>this.handleChange(event,"confirmPassword")}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={2}>
+                                                />    
                                             </Grid>
                                         </Grid>
                                         <Typography variant="caption">
@@ -180,13 +202,14 @@ class SignUp extends Component{
                                                 >Next</Button>
                                         </Grid>
                                     </Grid>
-                                </form>
-                            </CardActions>
-                        </Grid>
+                                    </form>
+                                </CardActions>
+                            </Grid>
                             <Grid item md={5} className={classes.accountImage} >
-                                <Icon color="primary" fontSize="large">
-                                    <AcUnitIcon />
-                                </Icon>
+                                <img alt="account icon"
+                                    src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Google_account_icon.svg/1200px-Google_account_icon.svg.png"
+                                    className={classes.accountIcon}
+                                />
                             </Grid>
                         </Grid>
                     </div>

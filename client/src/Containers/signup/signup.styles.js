@@ -4,6 +4,11 @@ export default theme=>({
             display:'none'
         }
     },
+    accountIcon:{
+        margin:`${theme.spacing(10)}px ${theme.spacing(8)}px`,
+        width:'145px',
+        height:'180px'
+    },
     avatar: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(2),
