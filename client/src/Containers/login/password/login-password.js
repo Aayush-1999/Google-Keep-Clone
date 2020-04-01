@@ -42,13 +42,14 @@ class Login extends Component{
             state:{email:this.props.location.state.email}
         })
     }
+    
     handleClickShowPassword = () => {
         this.setState({showPassword: !this.state.showPassword });
-    };
+    }
     
     handleMouseDownPassword = event => {
         event.preventDefault();
-    };
+    }
 
     pwdFormHandler=(event)=>{
         event.preventDefault();
@@ -137,18 +138,18 @@ class Login extends Component{
                                     <Grid item xs>
                                         <Button color="primary" component={RouterLink} className={classes.label} 
                                         to="/forgotpws">Forgot password</Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.pwdFormHandler}
+                                        >
+                                            Next
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            <Grid item>
-                                <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.pwdFormHandler}
-                                >
-                                    Next
-                                </Button>
-                            </Grid>
-                        </Grid>
                             </FormControl>
                         </CardActions>
                     </div>
