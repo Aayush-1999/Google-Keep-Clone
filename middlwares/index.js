@@ -1,7 +1,6 @@
 const express       = require("express");
       path          = require("path"),
-      compression   = require("compression"),  
-      passportSetup = require("./passport/setup"),
+      compression   = require("compression");
 
 module.exports = app => {
 
@@ -15,8 +14,6 @@ module.exports = app => {
         // fallback to standard filter function
         return compression.filter(req, res)
     }
-
-    passportSetup(app);
     
     app.use(express.static(path.join(__dirname,"../public")));
     app.use(express.static(path.join(__dirname,"../node_modules/materialize-css/dist")));
