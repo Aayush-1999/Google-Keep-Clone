@@ -1,7 +1,6 @@
 const express      = require("express"),
       router       = express.Router(),
       bcrypt       = require("bcryptjs"),
-      passport     = require("passport"),
       jwt          = require("jsonwebtoken"),
       User         = require("../models/user");
 
@@ -19,7 +18,6 @@ router.post("/register",async(req,res)=>{
             password:hash,
             image:"https://res.cloudinary.com/image-storage/image/upload/v1572009434/blank-avatar_opbhgx.png"
         });
-        console.log(user)
         const token=jwt.sign(
             {id:user._id},
             process.env.JWT_SECRET_KEY,
@@ -62,12 +60,6 @@ router.post("/login/checkPwd",async(req, res) => {
     catch(err){
         res.status(400).json({msg:"Something went wrong"})
     }
-});
-
-//LOGOUT ROUTE
-router.get("/logout",(req,res)=>{
-    req.logOut();
-    res.status(200).send("logout uccessful");
 });
 
 module.exports=router;
