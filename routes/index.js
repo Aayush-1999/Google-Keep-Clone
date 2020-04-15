@@ -2,7 +2,8 @@ const express      = require("express"),
       router       = express.Router(),
       bcrypt       = require("bcryptjs"),
       jwt          = require("jsonwebtoken"),
-      User         = require("../models/user");
+      User         = require("../models/user"),
+      refreshTokens= {};
 
 //REGISTER ROUTE
 router.post("/register",async(req,res)=>{
@@ -23,12 +24,18 @@ router.post("/register",async(req,res)=>{
             process.env.JWT_SECRET_KEY,
             { expiresIn:3600 }
         )
-        res.status(200).json({user,token});
+        const refreshToken=jwt.sign(
+            {id:user._id},
+            process.env.REFRESH_TOKEN_SECRET_KEY,
+            {expiresIn:86400 }
+        )
+        refreshTokens[refreshToken]=user.email
+        res.status(200).json({user,token,refreshToken});
     }
     catch(err){
         res.status(400).json({msg:"registeration unsuccessful"});
     }    
-});
+})
 
 //LOGIN ROUTE - CHECK EMAIL 
 router.post("/login/checkEmail",async(req,res)=>{
@@ -54,12 +61,34 @@ router.post("/login/checkPwd",async(req, res) => {
                     process.env.JWT_SECRET_KEY,
                     { expiresIn:3600 }
                 ) 
-                res.status(200).json({user,token});
+                const refreshToken=jwt.sign(
+                    {id:user._id},
+                    process.env.REFRESH_TOKEN_SECRET_KEY,
+                    {expiresIn:86400 }
+                )
+                refreshTokens[refreshToken]=req.body.email       
+                res.status(200).json({user,token,refreshToken});
             })
     }
     catch(err){
         res.status(400).json({msg:"Something went wrong"})
     }
-});
+})
+
+router.post("/token",async (req,res)=>{
+    const refreshToken = req.body.refreshTokens
+    if((refreshToken in refreshTokens) && (refreshTokens[refreshToken]==req.body.email)){
+        const user = await User.findOne({email:req.body.email})
+        const token=jwt.sign(
+            {id:user._id},
+            process.env.JWT_SECRET_KEY,
+            { expiresIn:3600 }
+        )
+        res.status(200).json({token})
+    }
+    else {
+        res.status(404).mssg({'Invalid request'})
+    }
+})
 
 module.exports=router;
