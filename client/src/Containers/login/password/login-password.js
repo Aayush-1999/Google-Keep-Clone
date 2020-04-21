@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 import axios from '../../../axiosInstance';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
@@ -23,6 +24,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { withStyles} from '@material-ui/core/styles';  
 import Container from '@material-ui/core/Container';
 import styles from './login-password.styles';
+import * as actions from '../../../store/actions/index';
 
 class Login extends Component{
     state={
@@ -62,6 +64,7 @@ class Login extends Component{
                 .then(response=>{
                     console.log(response);
                     if(response.status===200){
+                        this.props.onAuthStart(response.data)
                         this.props.history.push({
                             pathname: "/home",
                             state:{user:response.data}
@@ -159,4 +162,10 @@ class Login extends Component{
     }
 }
 
-export default  withStyles(styles)(Login);
+const mapDispatchToProps=dispatch=>{
+    return{
+        onAuthStart:(userData)=>dispatch(actions.authStart(userData))
+    }
+}
+
+export default  connect(null,mapDispatchToProps)(withStyles(styles)(Login));
