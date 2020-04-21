@@ -34,7 +34,7 @@ router.post("/register",async(req,res)=>{
     }
     catch(err){
         res.status(400).json({msg:"registeration unsuccessful"});
-    }    
+    }
 })
 
 //LOGIN ROUTE - CHECK EMAIL 
@@ -76,7 +76,7 @@ router.post("/login/checkPwd",async(req, res) => {
 })
 
 router.post("/token",async (req,res)=>{
-    const refreshToken = req.body.refreshTokens
+    const refreshToken = req.body.refreshToken
     if((refreshToken in refreshTokens) && (refreshTokens[refreshToken]==req.body.email)){
         const user = await User.findOne({email:req.body.email})
         const token=jwt.sign(
@@ -84,10 +84,10 @@ router.post("/token",async (req,res)=>{
             process.env.JWT_SECRET_KEY,
             { expiresIn:3600 }
         )
-        res.status(200).json({token})
+        res.status(200).json({user,token,refreshToken})
     }
     else {
-        res.status(404).mssg({'Invalid request'})
+        res.status(404).json({mssg:'Invalid request'})
     }
 })
 
