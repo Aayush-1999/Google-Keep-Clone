@@ -10,8 +10,7 @@ require("dotenv").config();
 
 //ROUTES
 const indexRoute         = require("./routes/index"),
-      noteRoute          = require("./routes/note"),
-      resetPasswordRoute = require("./routes/resetpass");
+      noteRoute          = require("./routes/note");
 
 mongoose.connect(process.env.DATABASEURL,{ useUnifiedTopology: true ,useNewUrlParser:true});
 mongoose.set("useFindAndModify",false);
@@ -26,7 +25,6 @@ app.use(methodOverride("_method"));
 middleware(app);
 
 app.use("/",indexRoute);
-// app.use("/",resetPasswordRoute);
 // app.use("/note",noteRoute);
 
 app.listen(5000)
