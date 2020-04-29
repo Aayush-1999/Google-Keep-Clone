@@ -1,9 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialStore={
-    user:JSON.parse(localStorage.getItem('user')),
-    token:localStorage.getItem('token'),
-    refreshToken:localStorage.getItem('refreshToken'),
+    user:null,
+    token:null,
+    refreshToken:null,
+    authenticated:false
 }
 
 const reducer=(state=initialStore,action)=>{
@@ -13,14 +14,16 @@ const reducer=(state=initialStore,action)=>{
                 ...state,
                 user:action.user,
                 token:action.token,
-                refreshToken:action.refreshToken
+                refreshToken:action.refreshToken,
+                authenticated:true
             }
         case actionTypes.AUTH_LOGOUT:
             return{
                 ...state,
                 user:null,
                 token:null,
-                refreshToken:null
+                refreshToken:null,
+                authenticated:false
             }
         default: return state;
     }
