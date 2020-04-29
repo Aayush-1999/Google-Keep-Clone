@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import axios from '../../axiosInstance';
 import TextField from '@material-ui/core/TextField';
@@ -17,6 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import * as actions from '../../store/actions/index';
 import styles from './signup.styles';
 
 class SignUp extends Component{
@@ -59,6 +61,7 @@ class SignUp extends Component{
                 .then(response=>{
                     console.log(response);
                     if(response.status===200){
+                        this.props.onAuthStart(response.data)
                         this.props.history.push({
                             pathname: "/home",
                             state:{user:response.data}
@@ -67,7 +70,11 @@ class SignUp extends Component{
                 })
                 .catch((error)=>{
                     if(error.response){
-                        this.setState({progressBar:false,error:true,helperText:"Couldn't find your account"})
+                        this.setState({
+                            progressBar:false,
+                            error:true,
+                            helperText:"Couldn't find your account"
+                        })
                     }
                     else{
                         console.log(error);
@@ -219,4 +226,10 @@ class SignUp extends Component{
     }
 }
 
-export default  withStyles(styles)(SignUp);
+const mapDispatchToProps=dispatch=>{
+    return{
+        onAuthStart:(userData)=>dispatch(actions.authStart(userData))
+    }
+}
+
+export default  connect(null,mapDispatchToProps)(withStyles(styles)(SignUp));
