@@ -1,7 +1,11 @@
-import React from 'react';
+import React,{Component} from 'react';
 
-const Layout=(props)=>{
-
+class Layout extends Component{
+    render(){
+        return{
+            
+        }
+    }
 }
 
 export default Layout;
