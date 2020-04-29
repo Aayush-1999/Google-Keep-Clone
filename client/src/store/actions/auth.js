@@ -52,6 +52,7 @@ export const logout=()=>{
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
     localStorage.removeItem('expirationDate')
+    localStorage.removeItem('refreshExpirationDate')
     localStorage.removeItem('user')
     return{
         type:actionTypes.AUTH_LOGOUT
@@ -67,9 +68,10 @@ export const authCheckState=()=>{
         else{
             const expirationDate=new Date(localStorage.getItem('expirationDate'))
             if(expirationDate>new Date()){
-                const userId=localStorage.getItem('userId')
-                dispatch(authSuccess(token,userId))
-                dispatch(checkAuthTimeout((expirationDate.getTime()-new Date().getTime())/1000))
+                const user=JSON.parse(localStorage.getItem('user'))
+                const refreshToken=localStorage.getItem('refreshToken')
+                dispatch(authSuccess({token,user,refreshToken}))
+                dispatch(checkAuthTimeout((expirationDate.getTime()-new Date().getTime())/1000,user))
             }
             else{
                 dispatch(logout())
