@@ -40,7 +40,6 @@ class Login extends Component{
                     email:this.state.email
                 })
                 .then(response=>{
-                    console.log(response);
                     if(response.status===200){
                         this.props.history.push({
                             pathname: "/signin/pwd",
