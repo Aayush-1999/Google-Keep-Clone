@@ -70,7 +70,7 @@ export const authCheckState=()=>{
             if(expirationDate>new Date()){
                 const user=JSON.parse(localStorage.getItem('user'))
                 const refreshToken=localStorage.getItem('refreshToken')
-                dispatch(authSuccess({token,user,refreshToken}))
+                dispatch(authSuccess(token,user,refreshToken))
                 dispatch(checkAuthTimeout((expirationDate.getTime()-new Date().getTime())/1000,user))
             }
             else{
