@@ -20,20 +20,22 @@ class App extends Component{
         <Route path="/signin" exact component={LoginEmail} />
         <Route path="/signin/pwd" exact component={LoginPassword} />
         <Route path="/signup" exact component={SignUp} />
+        <Redirect to="/" />
       </Switch>
     )
     
     if(this.props.isAuthenticated){
       routes=(
-        <Switch>
-          <Route path="/" exact component={Home} />
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Redirect to="/" />
+          </Switch>
+        </Layout>
       )
     }
-    return(
-      <Layout>
+    return(      
         {routes}
-      </Layout>
     )
   }
 }
