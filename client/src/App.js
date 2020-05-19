@@ -6,6 +6,7 @@ import LoginPassword from './Containers/login/password/login-password';
 import SignUp from './Containers/signup/signup';
 import Layout from './hoc/Layout/Layout';
 import Home from './Containers/Home/Home';
+import Auxiliary from './hoc/Auxiliary/Auxiliary';
 import * as actions from './store/actions/index';
 
 class App extends Component{
@@ -34,8 +35,10 @@ class App extends Component{
         </Layout>
       )
     }
-    return(      
-        {routes}
+    return(
+        <Auxiliary>
+          {routes}
+        </Auxiliary>
     )
   }
 }

@@ -21,10 +21,10 @@ const store=createStore(rootReducer,composeEnhancers(
 
 const app=(
     <Provider store={store} >
-       <BrowserRouter>
+        <BrowserRouter>
             <CssBaseline />
             <App />
-    </BrowserRouter>
+        </BrowserRouter>
     </Provider>
 );
 
