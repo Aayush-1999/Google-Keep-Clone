@@ -1,24 +1,8 @@
-import React,{Component} from './node_modules/react';
-import {withStyles} from './node_modules/@material-ui/core/styles';
+import React,{Component} from 'react';
 import SideDrawer from '../../Components/Navigation/SideDrawer/SideDrawer';
-
-const styles=theme=({
-    content:{
-        flexGrow:1,
-        padding:theme.spacing(3)
-    },
-    root:{
-        display:'flex'
-    },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-    }
-})
-
+import AppBar from '../../Components/Navigation/Appbar/Appbar';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './Layout.styles';
 
 class Layout extends Component{
     state={
@@ -35,6 +19,7 @@ class Layout extends Component{
         const {classes} = this.props;
         return(
             <div className={classes.root}>
+                <AppBar onDrawerToggle={this.handleDrawerToogle} />
                 <SideDrawer open={this.state.open} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
