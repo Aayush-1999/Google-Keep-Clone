@@ -50,6 +50,7 @@ function Header(props) {
           >
             <MenuIcon />
           </IconButton>
+          <img src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" alt="keep_logo" className={classes.keepLogo} />
           <Typography className={classes.title} variant="h6" noWrap>
             Keep
           </Typography>
