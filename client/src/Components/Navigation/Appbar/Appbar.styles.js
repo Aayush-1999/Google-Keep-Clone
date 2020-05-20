@@ -4,15 +4,26 @@ export default theme => ({
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      boxShadow: 'none',
+      borderBottom: '1px solid rgba(0,0,0,0.15)'
     },
     grow: {
       flexGrow: 1,
     },
+    keepLogo:{
+      height: '40px',
+      width: '40px',
+      marginRight : theme.spacing(1)
+    },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: '4px',
+      color: '#5f6368'
     },
     title: {
-      display: 'block',
+      display: 'inline-block',
+      color: '#5f6368',
+      fontSize: '22px',
+      fontWeight: '400',
     },
     search: {
       position: 'relative',
