@@ -4,12 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink} from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
+import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import styles from './SideDrawer.styles';
 import Toolbar from '@material-ui/core/Toolbar';
 
@@ -39,53 +41,53 @@ function SideDrawer(props) {
     >
         <Toolbar />
         <List>
-            <ListItem button
-                classes={{root:classes.listItem}} 
+            <ListItem button disableRipple
+                classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
                 to='/home' 
                 selected={selectedIndex === 0} 
                 onClick={(event)=>handleListItemClick(event,0)}      
             >
-                <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                <ListItemText primary="Notes" />
+                <ListItemIcon>{<EmojiObjectsOutlinedIcon />}</ListItemIcon>
+                <ListItemText primary="Notes" primaryTypographyProps={{variant:"subtitle2",classes:{subtitle2:classes.listText} }} />
             </ListItem>
-            <ListItem button
-                classes={{root:classes.listItem}} 
+            <ListItem button disableRipple
+                classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
                 to='/reminders' 
                 selected={selectedIndex === 1} 
                 onClick={(event)=>handleListItemClick(event,1)}  
             >
-                <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                <ListItemText primary="Reminders" />
+                <ListItemIcon>{<NotificationsNoneOutlinedIcon />}</ListItemIcon>
+                <ListItemText primary="Reminders" primaryTypographyProps={{variant:"subtitle2"}}  />
             </ListItem>
-            <ListItem button
-                classes={{root:classes.listItem}}  
+            <ListItem button disableRipple
+                classes={{root:classes.listItem,selected:classes.selected}}  
                 selected={selectedIndex === 2} 
                 onClick={(event)=>handleListItemClick(event,2)}  
             >
-                <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                <ListItemText primary="Edit labels" />
+                <ListItemIcon>{<EditOutlinedIcon />}</ListItemIcon>
+                <ListItemText primary="Edit labels" primaryTypographyProps={{variant:"subtitle2"}}  />
             </ListItem>
-            <ListItem button
-                classes={{root:classes.listItem}} 
+            <ListItem button disableRipple
+                classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
                 to='/archive' 
                 selected={selectedIndex === 3} 
                 onClick={(event)=>handleListItemClick(event,3)}  
             >
-                <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                <ListItemText primary="Archive" />
+                <ListItemIcon>{<ArchiveOutlinedIcon />}</ListItemIcon>
+                <ListItemText primary="Archive" primaryTypographyProps={{variant:"subtitle2"}}  />
             </ListItem>
-            <ListItem button
-                classes={{root:classes.listItem}} 
+            <ListItem button disableRipple
+                classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
                 to='/trash' 
                 selected={selectedIndex === 4} 
                 onClick={(event)=>handleListItemClick(event,4)}  
             >
-                <ListItemIcon>{<MailIcon />}</ListItemIcon>
-                <ListItemText primary="Trash" />
+                <ListItemIcon>{<DeleteOutlineOutlinedIcon />}</ListItemIcon>
+                <ListItemText primary="Trash" primaryTypographyProps={{variant:"subtitle2"}}  />
             </ListItem>
         </List>
     </Drawer>
