@@ -20,10 +20,13 @@ export default theme => ({
       color: '#5f6368'
     },
     title: {
-      display: 'inline-block',
+      display: 'none',
       color: '#5f6368',
       fontSize: '22px',
       fontWeight: '400',
+      [theme.breakpoints.up('sm')]:{
+        display:'block'
+      }
     },
     search: {
       position: 'relative',
@@ -31,6 +34,8 @@ export default theme => ({
       backgroundColor: 'rgba(0,0,0,0.17)',
       '&:hover': {
         backgroundColor: theme.palette.common.white,
+        border: '1px solid transparent',
+        boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
       },
       marginRight: theme.spacing(2),
       marginLeft: 0,
