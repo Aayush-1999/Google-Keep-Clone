@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link as RouterLink} from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -16,6 +17,11 @@ const useStyles = makeStyles(styles)
 
 function SideDrawer(props) {
   const classes = useStyles();
+  const [selectedIndex,setSelectedIndex] = useState(0);
+
+  const handleListItemClick = (event,index) => {
+      setSelectedIndex(index);
+  }
 
   return (
     <Drawer
@@ -33,21 +39,54 @@ function SideDrawer(props) {
     >
         <Toolbar />
         <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+            <ListItem button
+                classes={{root:classes.listItem}} 
+                component={RouterLink} 
+                to='/home' 
+                selected={selectedIndex === 0} 
+                onClick={(event)=>handleListItemClick(event,0)}      
+            >
+                <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                <ListItemText primary="Notes" />
             </ListItem>
-            ))}
-        </List>
-        <Divider />
-        <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+            <ListItem button
+                classes={{root:classes.listItem}} 
+                component={RouterLink} 
+                to='/reminders' 
+                selected={selectedIndex === 1} 
+                onClick={(event)=>handleListItemClick(event,1)}  
+            >
+                <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                <ListItemText primary="Reminders" />
             </ListItem>
-            ))}
+            <ListItem button
+                classes={{root:classes.listItem}}  
+                selected={selectedIndex === 2} 
+                onClick={(event)=>handleListItemClick(event,2)}  
+            >
+                <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                <ListItemText primary="Edit labels" />
+            </ListItem>
+            <ListItem button
+                classes={{root:classes.listItem}} 
+                component={RouterLink} 
+                to='/archive' 
+                selected={selectedIndex === 3} 
+                onClick={(event)=>handleListItemClick(event,3)}  
+            >
+                <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                <ListItemText primary="Archive" />
+            </ListItem>
+            <ListItem button
+                classes={{root:classes.listItem}} 
+                component={RouterLink} 
+                to='/trash' 
+                selected={selectedIndex === 4} 
+                onClick={(event)=>handleListItemClick(event,4)}  
+            >
+                <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                <ListItemText primary="Trash" />
+            </ListItem>
         </List>
     </Drawer>
   );
