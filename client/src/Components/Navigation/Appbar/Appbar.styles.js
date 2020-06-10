@@ -20,29 +20,31 @@ export default theme => ({
       color: '#5f6368'
     },
     title: {
-      display: 'none',
       color: '#5f6368',
       fontSize: '22px',
       fontWeight: '400',
       [theme.breakpoints.up('sm')]:{
-        display:'block'
+        width: theme.spacing(10),
+        marginRight: theme.spacing(4)
       }
     },
     search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: 'rgba(0,0,0,0.17)',
-      '&:hover': {
-        backgroundColor: theme.palette.common.white,
-        border: '1px solid transparent',
-        boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
+      display: 'none',
       [theme.breakpoints.up('sm')]: {
+        display: 'block',
         marginLeft: theme.spacing(3),
-        width: 'auto',
+        marginRight: theme.spacing(2),
+        // padding: '11px 0',
+        width: '56%',
+        height: '46px',
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: 'rgba(0,0,0,0.17)',
+        '&:hover': {
+          backgroundColor: theme.palette.common.white,
+          border: '1px solid transparent',
+          boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
+        },
       },
     },
     searchIcon: {
@@ -59,12 +61,8 @@ export default theme => ({
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '20ch',
-      },
+      width: '100%'
     },
 })
