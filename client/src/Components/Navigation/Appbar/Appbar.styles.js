@@ -53,12 +53,15 @@ export default theme => ({
       height: '100%',
       position: 'absolute',
       pointerEvents: 'none',
+      cursor: 'pointer',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      color: '#5f6368'
     },
     inputRoot: {
       color: 'inherit',
+      height: '100%'
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
@@ -66,4 +69,10 @@ export default theme => ({
       transition: theme.transitions.create('width'),
       width: '100%'
     },
+    inputFocused: {
+      borderRadius: theme.spacing(1),
+      backgroundColor: 'rgba(255,255,255,1)',
+      border: '1px solid transparent',
+      boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
+    }
 })
