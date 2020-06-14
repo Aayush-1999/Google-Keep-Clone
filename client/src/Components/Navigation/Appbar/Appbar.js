@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -54,19 +55,19 @@ function Header(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             Keep
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+          {/* <div className={classes.search}> */}
+            {/* <div className={classes.searchIcon}> */}
+              {/* <SearchIcon /> */}
+            {/* </div> */}
             <InputBase
               placeholder="Search"
               classes={{
-                root: classes.inputRoot,
+                root: clsx(classes.inputRoot,classes.search),
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          {/* </div> */}
           <div className={classes.grow} />
           <div className={classes.accountOptions}>
             <IconButton
