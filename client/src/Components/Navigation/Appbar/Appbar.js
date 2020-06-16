@@ -17,6 +17,7 @@ const useStyles = makeStyles(styles);
 function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [searchClick, setSearchClick] = React.useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,7 +65,6 @@ function Header(props) {
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
-                focused: classes.inputFocused
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
