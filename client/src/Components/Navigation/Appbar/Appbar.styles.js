@@ -34,19 +34,18 @@ export default theme => ({
         display: 'block',
         marginLeft: theme.spacing(3),
         marginRight: theme.spacing(2),
-        // padding: '11px 0',
         width: '58%',
         height: '47px',
         position: 'relative',
         borderRadius: theme.spacing(1),
-        backgroundColor: '#f1f3f4',
-        '&:focusVisible': {
-          backgroundColor: theme.palette.common.white,
-          border: '1px solid transparent',
-          boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
-        },
-        zIndex: '1'
+        backgroundColor: '#f1f3f4'
       },
+    },
+    searchFocussed: {
+      borderRadius: theme.spacing(1),
+      backgroundColor: 'rgba(255,255,255,1)',
+      border: '1px solid transparent',
+      boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15)'
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
@@ -59,20 +58,22 @@ export default theme => ({
       justifyContent: 'center',
       color: '#5f6368'
     },
+    closeSearchIcon: {
+      float: 'right'
+    },
     inputRoot: {
       color: 'inherit',
-      height: '100%'
+      height: '100%',
+      [theme.breakpoints.up('sm')]:{
+        width: '84%'
+      },
+      [theme.breakpoints.up('lg')]:{
+        width: '92%'
+      },
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
       transition: theme.transitions.create('width'),
-      width: '100%'
-    },
-    inputFocused: {
-      borderRadius: theme.spacing(1),
-      backgroundColor: 'rgba(255,255,255,1)',
-      border: '1px solid transparent',
-      boxShadow:'0 1px 1px 0  rgba(65,69,73,0.3), 0 1px 3px 0 rgba(65,69,73,0.15)'
     }
 })
