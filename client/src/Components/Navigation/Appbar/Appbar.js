@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import clsx from 'clsx';
 import styles from './Appbar.styles';
 
 const useStyles = makeStyles(styles);
@@ -18,9 +20,13 @@ function Header(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchClick, setSearchClick] = React.useState(false);
-  const isMenuOpen = Boolean(anchorEl);
+  
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  }
+  
+  const updateSearchClick = () => {
+    setSearchClick(true);
   }
 
   const handleMenuClose = () => {
@@ -31,11 +37,11 @@ function Header(props) {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
+      getContentAnchorEl={null}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       id={menuId}
-      keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-      open={isMenuOpen}
+      open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
@@ -55,12 +61,16 @@ function Header(props) {
           <Typography className={classes.title} variant="h6" noWrap>
             Keep
           </Typography>
-          <div className={classes.search}>
+          <div className={clsx({
+              [classes.search]: true,
+              [classes.searchFocussed]: searchClick
+            })}
+            onClick= {updateSearchClick}
+            >
             <IconButton className={classes.searchIcon}>
               <SearchIcon />
             </IconButton>
             <InputBase
-              fullWidth
               placeholder="Search"
               classes={{
                 root: classes.inputRoot,
@@ -68,6 +78,10 @@ function Header(props) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+            {searchClick ?
+            <IconButton className={classes.closeSearchIcon} >
+              <CloseIcon />
+            </IconButton> : null}
           </div>
           <div className={classes.grow} />
           <div className={classes.accountOptions}>
