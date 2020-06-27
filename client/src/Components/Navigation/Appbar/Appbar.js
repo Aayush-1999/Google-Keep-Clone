@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import clsx from 'clsx';
 import styles from './Appbar.styles';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(styles);
 
@@ -27,6 +28,10 @@ function Header(props) {
   
   const updateSearchClick = () => {
     setSearchClick(true);
+  }
+
+  const closeSearchClick = () => {
+    setSearchClick(false);
   }
 
   const handleMenuClose = () => {
@@ -44,8 +49,11 @@ function Header(props) {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <div><AccountCircle  className = {classes.profileMenu} /></div>
+      <div>Aayush Agarwal</div>
+      <div>aayushaggarwal207@gmail.com</div>
+      <Divider />
+      <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
     </Menu>
   );
 
@@ -78,10 +86,10 @@ function Header(props) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-            {searchClick ?
-            <IconButton className={classes.closeSearchIcon} >
+            {searchClick &&
+            <IconButton className={classes.closeSearchIcon} onClick={closeSearchClick} >
               <CloseIcon />
-            </IconButton> : null}
+            </IconButton>}
           </div>
           <div className={classes.grow} />
           <div className={classes.accountOptions}>
