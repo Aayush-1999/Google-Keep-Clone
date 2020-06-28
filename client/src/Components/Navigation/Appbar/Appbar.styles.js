@@ -7,8 +7,26 @@ export default theme => ({
       boxShadow: 'none',
       borderBottom: '1px solid rgba(0,0,0,0.15)'
     },
+    closeSearchIcon: {
+      float: 'right'
+    },
     grow: {
       flexGrow: 1,
+    },
+    inputRoot: {
+      color: 'inherit',
+      height: '100%',
+      [theme.breakpoints.up('sm')]:{
+        width: '84%'
+      },
+      [theme.breakpoints.up('lg')]:{
+        width: '92%'
+      },
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create('width'),
     },
     keepLogo:{
       height: '40px',
@@ -19,14 +37,28 @@ export default theme => ({
       marginRight: '4px',
       color: '#5f6368'
     },
-    title: {
-      color: '#5f6368',
-      fontSize: '22px',
-      fontWeight: '400',
-      [theme.breakpoints.up('sm')]:{
-        width: theme.spacing(10),
-        marginRight: theme.spacing(4)
-      }
+    profileMenu:{
+      width: '304px',
+      [theme.breakpoints.up('sm')]: {
+        width: '324px'
+      },
+      padding: 0,
+    },
+    profileMenuAccountIcon: {
+      height: '86px',
+      width: '86px',
+    },
+    profileMenuInfo: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '20px 33px',
+      alignItems: 'center'
+    },
+    profileMenuRadius: {
+      borderRadius: theme.spacing(1)
+    },
+    profileUserName: {
+      fontWeight: '500'
     },
     search: {
       display: 'none',
@@ -58,22 +90,17 @@ export default theme => ({
       justifyContent: 'center',
       color: '#5f6368'
     },
-    closeSearchIcon: {
-      float: 'right'
+    signOutButton: {
+      margin: theme.spacing(1),
+      justifyContent: 'center'
     },
-    inputRoot: {
-      color: 'inherit',
-      height: '100%',
+    title: {
+      color: '#5f6368',
+      fontSize: '22px',
+      fontWeight: '400',
       [theme.breakpoints.up('sm')]:{
-        width: '84%'
-      },
-      [theme.breakpoints.up('lg')]:{
-        width: '92%'
-      },
+        width: theme.spacing(10),
+        marginRight: theme.spacing(4)
+      }
     },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1.5em + ${theme.spacing(4)}px)`,
-      transition: theme.transitions.create('width'),
-    }
-})
+  })

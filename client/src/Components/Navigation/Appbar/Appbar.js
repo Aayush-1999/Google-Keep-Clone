@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import clsx from 'clsx';
 import styles from './Appbar.styles';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(styles);
 
@@ -48,12 +49,15 @@ function Header(props) {
       transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
+      classes={{list: classes.profileMenu, paper: classes.profileMenuRadius }}
     >
-      <div><AccountCircle  className = {classes.profileMenu} /></div>
-      <div>Aayush Agarwal</div>
-      <div>aayushaggarwal207@gmail.com</div>
+      <div className={classes.profileMenuInfo}>
+        <AccountCircle className = {classes.profileMenuAccountIcon} />
+        <Typography variant = 'subtitle1' color='textPrimary' className={classes.profileUserName}>Aayush Agarwal</Typography>
+        <Typography variant='body2' color='textSecondary'>aayushaggarwal2007@gmail.com</Typography>
+      </div>
       <Divider />
-      <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
+      <MenuItem onClick={handleMenuClose} classes={{root: classes.signOutButton}} ><Button variant='outlined'>Sign out</Button></MenuItem>
     </Menu>
   );
 
@@ -101,7 +105,7 @@ function Header(props) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle fontSize='large' />
             </IconButton>
           </div>
         </Toolbar>
