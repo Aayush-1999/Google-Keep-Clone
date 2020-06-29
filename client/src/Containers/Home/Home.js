@@ -1,9 +1,10 @@
 import React,{Component} from 'react';
+import NewNote from '../../Components/NewNote/NewNote';
 
 class Home extends Component{
     render(){
         return(
-            <h1>Homepage</h1>
+            <NewNote />
         )
     }
 }
