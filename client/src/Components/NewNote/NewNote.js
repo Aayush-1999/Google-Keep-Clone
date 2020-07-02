@@ -21,11 +21,12 @@ function NewNote(props){
         <div className = {classes.cardContainer}>
             <Card classes = {{root : classes.card }} >
                 <CardContent classes={{root : classes.CardContent}} onClick={handleContentClick} >
-                    <TextField id="standard-basic" placeholder = { isShow ? "Title" : "Take a note..." } />
+                    <TextField placeholder = { isShow ? "Title" : "Take a note..." } 
+                     InputProps = {{ disableUnderline : true}} />
                 </CardContent>
                 {isShow &&
                 <div>
-                    <TextField id="standard-basic" placeholder="Take a note..." />
+                    <TextField placeholder = "Take a note..."  InputProps = {{disableUnderline : true}} />
                     <CardActions>
                         <Button size="small">Learn More</Button>
                     </CardActions>
