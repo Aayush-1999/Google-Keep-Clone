@@ -1,7 +1,6 @@
 export default theme=>({
     content:{
         flexGrow:1,
-        padding:theme.spacing(3)
     },
     root:{
         display:'flex'

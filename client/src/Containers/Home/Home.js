@@ -4,7 +4,9 @@ import NewNote from '../../Components/NewNote/NewNote';
 class Home extends Component{
     render(){
         return(
-            <NewNote />
+            <div>
+                <NewNote />
+            </div>
         )
     }
 }
