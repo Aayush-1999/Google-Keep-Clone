@@ -1,19 +1,20 @@
 export default theme => ({
     card: {
-        [theme.breakpoints.between('sm','md')]: {
-            width: '500px'
-        },
-        [theme.breakpoints.up('md')]: {
-            width: '600px'  
-        },
-        // boxShadow: 'inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07)',
+        position: 'relative',
+        maxWidth: '600px',
+        width: '100%',
+        margin: '0 auto',
         boxShadow: '0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149)',
-        borderRadius: '6px'
+        borderRadius: '6px',
+        border: '1px solid #e0e0e0'
     },
     cardContainer: {
+        [theme.breakpoints.up('sm')]: {
+            margin: '32px auto 16px auto',
+        },
+        margin: `${theme.spacing(3)}px ${theme.spacing(2)}px`,
         display: 'flex',
-        justifyContent: 'center',
-        margin: '32px auto 16px auto'
+        justifyContent: 'center'
     },
     cardContent: {
         '&:last-child': {
@@ -30,6 +31,6 @@ export default theme => ({
         color: '#80868b'
     },
     textContainer: {
-        padding: `9px ${theme.spacing(2)}px ${theme.spacing(1)}px ${theme.spacing(2)}px`,
+        padding: `12px ${theme.spacing(2)}px 6px ${theme.spacing(2)}px`,
     }
 })
