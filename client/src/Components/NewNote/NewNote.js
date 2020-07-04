@@ -23,7 +23,7 @@ function NewNote(props){
                 <CardContent classes={{root : classes.cardContent}} onClick={handleContentClick} >
                     <TextField placeholder = { isShow ? "Title" : "Take a note..." } 
                      InputProps = {{ disableUnderline : true, classes: {input: classes.inputPlaceholder} }} 
-                    classes={{root: classes.textContainer}} fullWidth />
+                    classes={{root: classes.textContainer}} fullWidth autoFocus size='small'/>
                     { isShow &&
                         <TextField placeholder = "Take a note..."  InputProps = {{disableUnderline : true}} 
                         classes={{root: classes.textContainer, classes: {input: classes.inputPlaceholder} }} fullWidth />
