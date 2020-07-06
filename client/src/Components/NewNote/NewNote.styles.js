@@ -10,7 +10,7 @@ export default theme => ({
     },
     cardContainer: {
         [theme.breakpoints.up('sm')]: {
-            margin: '32px auto 16px auto',
+            margin: `${theme.spacing(4)}px ${theme.spacing(2)}px`,
         },
         margin: `${theme.spacing(3)}px ${theme.spacing(2)}px`,
         display: 'flex',
@@ -32,5 +32,10 @@ export default theme => ({
     },
     textContainer: {
         padding: `12px ${theme.spacing(2)}px 6px ${theme.spacing(2)}px`,
+        width: '80%'
+
+    },
+    textContainerWidthxL: {
+        width: '90%'
     }
 })
