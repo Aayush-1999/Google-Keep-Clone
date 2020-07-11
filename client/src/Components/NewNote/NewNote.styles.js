@@ -22,20 +22,35 @@ export default theme => ({
         }, 
         padding: 0  
     },
-    inputPlaceholder: {
-        fontSize: '1rem',
+    iconButtonRoot: {
+        padding: '11px 12px'
+    },
+    labelPlaceholder: {
+        fontSize: '1.03rem',
         fontWeight: '500',
-        lineHeight: '1.5rem',
+        lineHeight: '1.4rem',
         letterSpacing: '0.00625em',
         fontFamily: 'Google Sans, Roboto, Arial, sans-seriff',
-        color: '#80868b'
+        color: '#80868b',
+    },
+    noPadding: {
+        padding : 0
     },
     textContainer: {
-        padding: `12px ${theme.spacing(2)}px 6px ${theme.spacing(2)}px`,
+        padding: `9px ${theme.spacing(2)}px 11px ${theme.spacing(2)}px`,
         width: '80%'
 
     },
     textContainerWidthxL: {
+        padding: `9px ${theme.spacing(2)}px 12px ${theme.spacing(2)}px`,
         width: '90%'
+    },
+    textPlaceholder: {
+        fontSize: '0.875rem',
+        fontWeight: '500',
+        lineHeight: '1.4rem',
+        letterSpacing: '0.00625em',
+        fontFamily: 'Google Sans, Roboto, Arial, sans-seriff',
+        color: '#80868b',
     }
 })

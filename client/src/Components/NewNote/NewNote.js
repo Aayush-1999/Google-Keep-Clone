@@ -25,20 +25,21 @@ function NewNote(props){
             <Card classes = {{root : classes.card }} >
                 <CardContent classes={{root : classes.cardContent}} onClick={handleContentClick} >
                     <TextField placeholder = { isShow ? "Title" : "Take a note..." } 
-                        InputProps = {{ disableUnderline : true, classes: {input: classes.inputPlaceholder} }} 
+                        InputProps = {{ disableUnderline : true, classes: {input: classes.labelPlaceholder, root: classes.noPadding} }} 
                         classes={{root: clsx(classes.textContainer,{ 
                             [classes.textContainerWidthxL]: isShow })}} autoFocus size='small'
-                        multiline 
+                        multiline margin='none'
                     />
                     { !isShow &&
-                    <span>
-                        <IconButton>
+                        <IconButton classes={{root: classes.iconButtonRoot}} >
                             <CheckBoxOutlined  />
                         </IconButton>
-                        <IconButton>
+                    }
+                    { !isShow &&
+                    
+                        <IconButton  classes={{root: classes.iconButtonRoot}}>
                             <ImageOutlined />
                         </IconButton>
-                    </span>
                     }
                     { isShow && 
                     <IconButton>
@@ -48,21 +49,22 @@ function NewNote(props){
                     </IconButton>
                     }
                     { isShow &&
-                    <TextField placeholder = "Take a note..."  InputProps = {{disableUnderline : true}} 
-                        classes={{root: classes.textContainer, classes: {input: classes.inputPlaceholder} }} fullWidth 
+                    <TextField placeholder = "Take a note..."  
+                        InputProps = {{disableUnderline : true, classes: {input: classes.textPlaceholder, root: classes.noPadding} }} 
+                        classes={{root: classes.textContainerWidthxL }} fullWidth 
                         multiline autoFocus
                     />
                     }
                 </CardContent>
                 {isShow &&
                 <CardActions>
-                    <IconButton><AddAlertOutlined /></IconButton>
-                    <IconButton><ColorLensOutlined /></IconButton>
-                    <IconButton><ImageOutlined /></IconButton>
-                    <IconButton><ArchiveOutlined /></IconButton>
-                    <IconButton><MoreVertOutlined /></IconButton>
-                    <IconButton><UndoOutlined /></IconButton>
-                    <IconButton><RedoOutlined /></IconButton>
+                    <IconButton size='small'><AddAlertOutlined /></IconButton>
+                    <IconButton size='small'><ColorLensOutlined /></IconButton>
+                    <IconButton size='small'><ImageOutlined /></IconButton>
+                    <IconButton size='small'><ArchiveOutlined /></IconButton>
+                    <IconButton size='small'><MoreVertOutlined /></IconButton>
+                    <IconButton size='small'><UndoOutlined /></IconButton>
+                    <IconButton size='small'><RedoOutlined /></IconButton>
                     <Button size="small">Close</Button>
                 </CardActions>
                 }
