@@ -22,8 +22,15 @@ export default theme => ({
         }, 
         padding: 0  
     },
+    closeButton: {
+        marginLeft: 'auto !important',
+        marginRight: theme.spacing(2)
+    },
     iconButtonRoot: {
         padding: '11px 12px'
+    },
+    iconSize: {
+        fontSize: '1.15rem'
     },
     labelPlaceholder: {
         fontSize: '1.03rem',
@@ -33,13 +40,21 @@ export default theme => ({
         fontFamily: 'Google Sans, Roboto, Arial, sans-seriff',
         color: '#80868b',
     },
-    noPadding: {
+    paddingZero: {
         padding : 0
+    },
+    paddingSmall: {
+        padding: '4px'
+    },
+    paddingMedium: {
+        padding: '9px'
+    },
+    smallLeftMargin: {
+        marginLeft: '4px'
     },
     textContainer: {
         padding: `9px ${theme.spacing(2)}px 11px ${theme.spacing(2)}px`,
         width: '80%'
-
     },
     textContainerWidthxL: {
         padding: `9px ${theme.spacing(2)}px 12px ${theme.spacing(2)}px`,
@@ -52,5 +67,5 @@ export default theme => ({
         letterSpacing: '0.00625em',
         fontFamily: 'Google Sans, Roboto, Arial, sans-seriff',
         color: '#80868b',
-    }
+    },
 })

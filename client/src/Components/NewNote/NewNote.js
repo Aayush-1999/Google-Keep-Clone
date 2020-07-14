@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import { CheckBoxOutlined, ImageOutlined, AddAlertOutlined, ColorLensOutlined, ArchiveOutlined, MoreVertOutlined, UndoOutlined, RedoOutlined } from '@material-ui/icons';
 import styles from './NewNote.styles';
 import clsx from 'clsx';
@@ -20,47 +21,66 @@ function NewNote(props){
             <Card classes = {{root : classes.card }} >
                 <CardContent classes={{root : classes.cardContent}} onClick={(event) => props.openNote(event, "insideForm")} >
                     <TextField placeholder = { props.isShowNote ? "Title" : "Take a note..." } 
-                        InputProps = {{ disableUnderline : true, classes: {input: classes.labelPlaceholder, root: classes.noPadding} }} 
+                        InputProps = {{ disableUnderline : true, classes: {input: classes.labelPlaceholder, root: classes.paddingZero} }} 
                         classes={{root: clsx(classes.textContainer,{ 
                             [classes.textContainerWidthxL]: props.isShowNote })}} autoFocus size='small'
                         multiline margin='none'
                     />
                     { !props.isShowNote &&
-                        <IconButton classes={{root: classes.iconButtonRoot}} >
-                            <CheckBoxOutlined  />
-                        </IconButton>
+                        <Tooltip title="New list">
+                            <IconButton classes={{root: classes.iconButtonRoot}} >
+                               <CheckBoxOutlined  />
+                            </IconButton>           
+                        </Tooltip>    
                     }
                     { !props.isShowNote &&
-                    
-                        <IconButton  classes={{root: classes.iconButtonRoot}}>
-                            <ImageOutlined />
-                        </IconButton>
+                        <Tooltip title="New note with image">
+                            <IconButton  classes={{root: classes.iconButtonRoot}}>
+                                <ImageOutlined />
+                            </IconButton>
+                        </Tooltip>
                     }
                     { props.isShowNote && 
-                    <IconButton>
-                        <span class="material-icons-outlined">
-                            push_pin
-                        </span>    
-                    </IconButton>
+                        <Tooltip title="Pin note">
+                            <IconButton>
+                                <span class="material-icons-outlined">
+                                    push_pin
+                                </span>    
+                            </IconButton>
+                        </Tooltip>
                     }
                     { props.isShowNote &&
                     <TextField placeholder = "Take a note..."  
-                        InputProps = {{disableUnderline : true, classes: {input: classes.textPlaceholder, root: classes.noPadding} }} 
+                        InputProps = {{disableUnderline : true, classes: {input: classes.textPlaceholder, root: classes.paddingZero} }} 
                         classes={{root: classes.textContainerWidthxL }} fullWidth 
                         multiline autoFocus
                     />
                     }
                 </CardContent>
                 { props.isShowNote &&
-                <CardActions>
-                    <IconButton size='small'><AddAlertOutlined /></IconButton>
-                    <IconButton size='small'><ColorLensOutlined /></IconButton>
-                    <IconButton size='small'><ImageOutlined /></IconButton>
-                    <IconButton size='small'><ArchiveOutlined /></IconButton>
-                    <IconButton size='small'><MoreVertOutlined /></IconButton>
-                    <IconButton size='small'><UndoOutlined /></IconButton>
-                    <IconButton size='small'><RedoOutlined /></IconButton>
-                    <Button size="small">Close</Button>
+                <CardActions classes={{root: classes.paddingSmall}}>
+                        <Tooltip title="Remind me">
+                            <IconButton classes={{root: clsx(classes.paddingMedium, classes.smallLeftMargin) }}><AddAlertOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Change color">
+                        <IconButton classes={{root: classes.paddingMedium}}><ColorLensOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Add image">
+                            <IconButton classes={{root: classes.paddingMedium}}><ImageOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Archive">
+                            <IconButton classes={{root: classes.paddingMedium}}><ArchiveOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="More">
+                            <IconButton classes={{root: classes.paddingMedium}}><MoreVertOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Undo">
+                            <IconButton classes={{root: classes.paddingMedium}}><UndoOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                        <Tooltip title="Redo">
+                            <IconButton classes={{root: classes.paddingMedium}}><RedoOutlined fontSize='small' classes={{root:classes.iconSize}} /></IconButton>
+                        </Tooltip>
+                    <Button size="small" classes={{root: classes.closeButton}} >Close</Button>
                 </CardActions>
                 }
             </Card>
