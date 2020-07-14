@@ -14,41 +14,36 @@ const useStyles = makeStyles(styles);
 
 function NewNote(props){
     const classes = useStyles();
-    const [isShow, setIsShow] = React.useState(false);
-
-    const handleContentClick = () => {
-        setIsShow(true);
-    }
 
     return(
         <div className = {classes.cardContainer}>
             <Card classes = {{root : classes.card }} >
-                <CardContent classes={{root : classes.cardContent}} onClick={handleContentClick} >
-                    <TextField placeholder = { isShow ? "Title" : "Take a note..." } 
+                <CardContent classes={{root : classes.cardContent}} onClick={(event) => props.openNote(event, "insideForm")} >
+                    <TextField placeholder = { props.isShowNote ? "Title" : "Take a note..." } 
                         InputProps = {{ disableUnderline : true, classes: {input: classes.labelPlaceholder, root: classes.noPadding} }} 
                         classes={{root: clsx(classes.textContainer,{ 
-                            [classes.textContainerWidthxL]: isShow })}} autoFocus size='small'
+                            [classes.textContainerWidthxL]: props.isShowNote })}} autoFocus size='small'
                         multiline margin='none'
                     />
-                    { !isShow &&
+                    { !props.isShowNote &&
                         <IconButton classes={{root: classes.iconButtonRoot}} >
                             <CheckBoxOutlined  />
                         </IconButton>
                     }
-                    { !isShow &&
+                    { !props.isShowNote &&
                     
                         <IconButton  classes={{root: classes.iconButtonRoot}}>
                             <ImageOutlined />
                         </IconButton>
                     }
-                    { isShow && 
+                    { props.isShowNote && 
                     <IconButton>
                         <span class="material-icons-outlined">
                             push_pin
                         </span>    
                     </IconButton>
                     }
-                    { isShow &&
+                    { props.isShowNote &&
                     <TextField placeholder = "Take a note..."  
                         InputProps = {{disableUnderline : true, classes: {input: classes.textPlaceholder, root: classes.noPadding} }} 
                         classes={{root: classes.textContainerWidthxL }} fullWidth 
@@ -56,7 +51,7 @@ function NewNote(props){
                     />
                     }
                 </CardContent>
-                {isShow &&
+                { props.isShowNote &&
                 <CardActions>
                     <IconButton size='small'><AddAlertOutlined /></IconButton>
                     <IconButton size='small'><ColorLensOutlined /></IconButton>
