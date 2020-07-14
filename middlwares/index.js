@@ -14,10 +14,6 @@ module.exports = app => {
         // fallback to standard filter function
         return compression.filter(req, res)
     }
-    
-    app.use(express.static(path.join(__dirname,"../public")));
-    app.use(express.static(path.join(__dirname,"../node_modules/materialize-css/dist")));
-    app.use(express.static(path.join(__dirname,"../node_modules/animate.css")));
 
 };
     
