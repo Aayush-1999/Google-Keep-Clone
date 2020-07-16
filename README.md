@@ -3,10 +3,23 @@
 This is a **clone** of **Google Keep**.
 
 <div>
-  <img alt="home_page" title="home_page" src="/readme-images/gkc-home.png">
-  <img alt="signup_page" title="signup_page" src="/readme-images/gkc-signup.png">
-  <img alt="signin_email" title="signin_email" src="/readme-images/gkc-signin_email.png">
-  <img alt="home_page" title="home_page" src="/readme-images/gkc-signin_pass.png">
+  <table><tr><td>
+  <img alt="home_page" title="Home page" src="/readme-images/gkc-home.png">
+  </td></tr></table>
+  <table><tr><td>
+  <img alt="signup_page" title="Signup page" src="/readme-images/gkc-signup.png">
+  </td></tr></table>
+  <span align="left">
+  <table><tr><td>
+  <img alt="signin_email" title="Signin email" style="float: left" src="/readme-images/gkc-signin_email.png">
+  </td></tr></table>
+  </span>
+  <span align="right">
+  <table><tr><td>
+  <img alt="signin_password" title="Signin password" style="float: right" src="/readme-images/gkc-signin_pass.png">
+  </td></tr></table>
+  </span>
+
 </div><br><br>
 
 ## Technologies used
