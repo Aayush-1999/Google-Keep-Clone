@@ -1,12 +1,17 @@
 # Google Keep Clone
 
-<!-- <a><img alt="Code Quality" src="https://img.shields.io/badge/code%20quality-A-brightgreen"></a>
-<a><img alt="Dependanices upto date" src="https://img.shields.io/david/Aayush-1999/Blogrite?label=dependencies"></a>
-<!-- <a><img alt="GNU-v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a> -->
-<!-- <a><img alt="Code Size" src="https://img.shields.io/badge/code%20size-110%20kB-orange"></a> -->
-<!-- <a><img alt="Website Up" src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg"></a> -->
-
 This is a **clone** of **Google Keep**.
+
+<!-- <div>
+<span align="left">
+  <img alt="Tour" style="float: left" width="45%" title="Tour of the App" src="/readme content/tour.gif">
+</span>
+
+<span align="right">
+  <img alt="Register" width="45%" style="float: right" title="Register to the App" src="/readme content/register.gif">
+</span>
+
+</div><br><br> -->
 
 ## Technologies used
 
@@ -18,4 +23,19 @@ This is a **clone** of **Google Keep**.
 * [MaterialUI](https://material-ui.com)
 * [Hooks](https://reactjs.org/docs/hooks-intro.html)
 * [Redux](https://redux.js.org/)
-* [Passport](https://passportjs.org/docs/)
+
+______
+
+## For Developers
+
+### Setup
+
+* Run `npm install` in the root directory which will installs all the back-end dependencies.
+* `cd client` moved to client directory (Front-end directory)
+* Run `npm install` again in the client directory. This will install all the react dependencies.
+* Add `.env` file in root directory and set all the env variables `(DATABASEURL, JWT_SECRET_KEY and REFRESH_TOKEN_SECRET_KEY)`.
+* Run `npm run dev`, this will automatically start the servers. Back-end will be running on PORT 5000 and Front-end on PORT 3000. 
+
+### Contributing
+
+Feel free to contribute :-)
