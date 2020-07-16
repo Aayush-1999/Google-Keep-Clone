@@ -9,18 +9,11 @@ This is a **clone** of **Google Keep**.
   <table><tr><td>
   <img alt="signup_page" title="Signup page" src="/readme-images/gkc-signup.png">
   </td></tr></table>
-  <span align="left">
-  <table><tr><td>
-  <img alt="signin_email" title="Signin email" style="float: left" src="/readme-images/gkc-signin_email.png">
-  </td></tr></table>
-  </span>
-  <span align="right">
-  <table><tr><td>
-  <img alt="signin_password" title="Signin password" style="float: right" src="/readme-images/gkc-signin_pass.png">
-  </td></tr></table>
-  </span>
-
-</div><br><br>
+  <table ><tr>
+    <td><img alt="signin_email" title="Signin email" src="/readme-images/gkc-signin_email.png"></td>
+    <td><img alt="signin_password" title="Signin password" src="/readme-images/gkc-signin_pass.png"></td>
+  </tr></table>
+</div><br>
 
 ## Technologies used
 
