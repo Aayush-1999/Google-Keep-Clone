@@ -2,16 +2,12 @@
 
 This is a **clone** of **Google Keep**.
 
-<!-- <div>
-<span align="left">
-  <img alt="Tour" style="float: left" width="45%" title="Tour of the App" src="/readme content/tour.gif">
-</span>
-
-<span align="right">
-  <img alt="Register" width="45%" style="float: right" title="Register to the App" src="/readme content/register.gif">
-</span>
-
-</div><br><br> -->
+<div>
+  <img alt="home_page" title="home_page" src="/readme-images/gkc-home.png">
+  <img alt="signup_page" title="signup_page" src="/readme-images/gkc-signup.png">
+  <img alt="signin_email" title="signin_email" src="/readme-images/gkc-signin_email.png">
+  <img alt="home_page" title="home_page" src="/readme-images/gkc-signin_pass.png">
+</div><br><br>
 
 ## Technologies used
 
