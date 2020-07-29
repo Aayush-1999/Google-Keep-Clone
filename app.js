@@ -3,7 +3,6 @@ const express               = require("express"),
       cors                  = require("cors"),
       bodyParser            = require("body-parser"),
       mongoose              = require("mongoose"),
-      methodOverride        = require("method-override");
       middleware            = require("./middlwares/index");
 
 require("dotenv").config();

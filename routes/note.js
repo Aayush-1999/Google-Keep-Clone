@@ -1,7 +1,6 @@
 const express        = require("express"),
       router         = express.Router(),
       Note           = require("../models/note"),
-      methodOverride = require("method-override"),
       {cloudinary,upload} = require("../utils/cloudinary");
 
 
