@@ -44,7 +44,7 @@ function SideDrawer(props) {
             <ListItem button disableRipple
                 classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
-                to='/home' 
+                to='/#home' 
                 selected={selectedIndex === 0} 
                 onClick={(event)=>handleListItemClick(event,0)}      
             >
@@ -54,7 +54,7 @@ function SideDrawer(props) {
             <ListItem button disableRipple
                 classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
-                to='/reminders' 
+                to='/#reminders' 
                 selected={selectedIndex === 1} 
                 onClick={(event)=>handleListItemClick(event,1)}  
             >
@@ -72,7 +72,7 @@ function SideDrawer(props) {
             <ListItem button disableRipple
                 classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
-                to='/archive' 
+                to='/#archive' 
                 selected={selectedIndex === 3} 
                 onClick={(event)=>handleListItemClick(event,3)}  
             >
@@ -82,7 +82,7 @@ function SideDrawer(props) {
             <ListItem button disableRipple
                 classes={{root:classes.listItem,selected:classes.selected}} 
                 component={RouterLink} 
-                to='/trash' 
+                to='/#trash' 
                 selected={selectedIndex === 4} 
                 onClick={(event)=>handleListItemClick(event,4)}  
             >
