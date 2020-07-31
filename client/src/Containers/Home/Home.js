@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
+import { withStyles} from '@material-ui/core/styles';  
 import NewNote from '../../Components/NewNote/NewNote';
+import Note from '../../Components/Note/Note';
+import styles from './Home.styles';
 
 class Home extends Component{
     state = {
@@ -17,12 +20,16 @@ class Home extends Component{
     }
 
     render(){
+        const { classes }  = this.props;
         return(
             <div onClick={this.handleNewNoteToggle} >
                 <NewNote isShowNote={this.state.showNewNote} openNote={this.handleNewNoteToggle} />
+                <div >
+                    <Note />
+                </div>
             </div>
         )
     }
 }
 
-export default Home;
+export default withStyles(styles)(Home);

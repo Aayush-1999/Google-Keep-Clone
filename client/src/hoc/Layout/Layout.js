@@ -15,8 +15,17 @@ class Layout extends Component{
         }))
     }
 
+    handleDrawerCloseOnSmallScreenSize=()=>{
+        if(window.innerWidth <= 640){
+            this.setState({
+                open:false
+            })
+        }
+    }
+
     render(){
         const {classes} = this.props;
+        window.addEventListener('resize',this.handleDrawerCloseOnSmallScreenSize)
         return(
             <div className={classes.root}>
                 <AppBar onDrawerToggle={this.handleDrawerToogle} />
