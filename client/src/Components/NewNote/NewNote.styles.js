@@ -27,7 +27,10 @@ export default theme => ({
         marginRight: theme.spacing(2)
     },
     iconButtonRoot: {
-        padding: '11px 12px'
+        padding: '11px 12px',
+        '@media screen and (max-width: 470px)': {
+            float: 'right'
+        }
     },
     iconSize: {
         fontSize: '1.15rem'
@@ -54,13 +57,40 @@ export default theme => ({
     },
     textContainer: {
         padding: `9px ${theme.spacing(2)}px 11px ${theme.spacing(2)}px`,
-        width: '80%'
+        width: '80%',
+        '@media screen and (max-width: 800px)': {
+            width: '75%'
+        },
+        '@media screen and (max-width: 700px)': {
+            width: '70%'
+        },
+        '@media screen and (max-width: 600px)': {
+            width: '75%'
+        },
+        '@media screen and (max-width: 470px)': {
+            width: '60%'
+        }
     },
     textContainerWidthxL: {
         padding: `9px ${theme.spacing(2)}px 12px ${theme.spacing(2)}px`,
-        width: '90%'
+        width: '90%',
+        '@media screen and (max-width: 800px)': {
+            width: '85%'
+        },
+        '@media screen and (max-width: 700px)': {
+            width: '80%'
+        },
+        '@media screen and (max-width: 640px)': {
+            width: '90%'
+        },
+        '@media screen and (max-width: 470px)': {
+            width: '60%'
+        }
     },
     textPlaceholder: {
+        [theme.breakpoints.down('sm')]: {
+            height: '22px'
+        },
         fontSize: '0.875rem',
         fontWeight: '500',
         lineHeight: '1.4rem',
