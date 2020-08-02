@@ -24,7 +24,7 @@ class Home extends Component{
         return(
             <div onClick={this.handleNewNoteToggle} >
                 <NewNote isShowNote={this.state.showNewNote} openNote={this.handleNewNoteToggle} />
-                <div >
+                <div className={classes.noteContainer}>
                     <Note />
                 </div>
             </div>

@@ -20,7 +20,9 @@ function Note(props){
     return(
         <div>
             <Card>
-
+                <CardHeader>First Note</CardHeader>
+                <CardContent></CardContent>
+                <CardActions></CardActions>
             </Card>
         </div>
     )
