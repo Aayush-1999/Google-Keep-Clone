@@ -21,10 +21,13 @@ class Home extends Component{
 
     render(){
         const { classes }  = this.props;
+
         return(
             <div onClick={this.handleNewNoteToggle} >
                 <NewNote isShowNote={this.state.showNewNote} openNote={this.handleNewNoteToggle} />
-                <div className={classes.noteContainer}>
+                <div className={classes.notesContainer}>
+                    <Note />
+                    <Note />
                     <Note />
                 </div>
             </div>
