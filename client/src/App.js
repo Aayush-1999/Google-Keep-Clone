@@ -15,18 +15,18 @@ class App extends Component{
   }
 
   render(){
-    let routes=(
-      <Switch>
-        <Route path="/" exact><Redirect to="/signin" /></Route>
-        <Route path="/signin" exact component={LoginEmail} />
-        <Route path="/signin/pwd" exact component={LoginPassword} />
-        <Route path="/signup" exact component={SignUp} />
-        <Redirect to="/" />
-      </Switch>
-    )
+    // let routes=(
+    //   <Switch>
+    //     <Route path="/" exact><Redirect to="/signin" /></Route>
+    //     <Route path="/signin" exact component={LoginEmail} />
+    //     <Route path="/signin/pwd" exact component={LoginPassword} />
+    //     <Route path="/signup" exact component={SignUp} />
+    //     <Redirect to="/" />
+    //   </Switch>
+    // )
     
-    if(this.props.isAuthenticated){
-      routes=(
+    // if(this.props.isAuthenticated){
+      let routes=(
         <Layout>
           <Switch>
             <Route path="/" exact component={Home} />
@@ -34,7 +34,7 @@ class App extends Component{
           </Switch>
         </Layout>
       )
-    }
+    // }
     return(
         <Auxiliary>
           {routes}
